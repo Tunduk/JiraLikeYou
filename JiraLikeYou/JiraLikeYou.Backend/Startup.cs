@@ -1,3 +1,5 @@
+using System.IO;
+using JiraLikeYou.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,11 +7,10 @@ using System.Threading.Tasks;
 using JiraLikeYou.Backend.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace JiraLikeYou.Backend
 {
@@ -34,6 +35,9 @@ namespace JiraLikeYou.Backend
                     .WithOrigins("http://localhost:52001");
             }));
             services.AddControllers();
+            services.AddDbContext<DataContext>(
+                options => options.UseSqlite(Configuration.GetConnectionString("Db")
+                ));
             services.AddSignalR();
             
         }
