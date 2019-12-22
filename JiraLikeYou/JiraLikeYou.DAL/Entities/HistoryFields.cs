@@ -6,11 +6,16 @@ namespace JiraLikeYou.DAL.Entities
     public class HistoryFields
     {
         [Key]
-        public int Id { get; set; }
-        public int HistoryId { get; set; }
+        public long Id { get; set; }
 
-        public int FieldId { get; set; }
+        public long HistoryId { get; set; }
+
+        public long FieldId { get; set; }
 
         public string Value { get; set; }
+
+        public History History { get; set; }
+
+        public SettingParsingFields Fields { get; set; }
     }
 }

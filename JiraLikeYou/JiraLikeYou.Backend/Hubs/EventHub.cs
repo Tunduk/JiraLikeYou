@@ -1,9 +1,9 @@
-﻿using JiraLikeYou.Backend.Models.HubModels;
-using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JiraLikeYou.Backend.Dto.HubModels;
 
 namespace JiraLikeYou.Backend.Hubs
 {

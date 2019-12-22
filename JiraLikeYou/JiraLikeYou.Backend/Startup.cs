@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using JiraLikeYou.Backend.Hubs;
+using JiraLikeYou.Backend.Mapping;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +36,7 @@ namespace JiraLikeYou.Backend
                     .WithOrigins("http://localhost:52001");
             }));
             services.AddControllers();
+            services.AddSingleton(AutoMapperConfiguration.CreateMapper());
             services.AddDbContext<DataContext>(
                 options => options.UseSqlite(Configuration.GetConnectionString("Db")
                 ));
