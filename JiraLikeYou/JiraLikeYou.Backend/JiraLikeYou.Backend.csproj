@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JiraLikeYou.BLL\JiraLikeYou.BLL.csproj" />
+    <ProjectReference Include="..\JiraLikeYou.DAL\JiraLikeYou.DAL.csproj" />
+  </ItemGroup>
+
+</Project>
