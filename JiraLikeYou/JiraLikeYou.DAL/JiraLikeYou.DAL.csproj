@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entiteis\" />
+    <Folder Include="Entities\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
 
