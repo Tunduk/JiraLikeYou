@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JiraLikeYou.BLL.Models
 {
-    public class History
+    public class EventSmallCard
     {
         public DateTime CreateDate { get; set; }
 
-        public string AvatarLink { get; set; }
+        public string ImageLink { get; set; }
 
         public string Text { get; set; }
     }

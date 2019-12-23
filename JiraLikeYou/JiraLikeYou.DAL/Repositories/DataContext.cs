@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using JiraLikeYou.DAL.Entities;
+﻿using JiraLikeYou.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace JiraLikeYou.DAL.Repositories
@@ -18,18 +15,36 @@ namespace JiraLikeYou.DAL.Repositories
         {
         }
 
-        public DbSet<History> History { get; set; }
+        public DbSet<ConfigEventType> ConfigEventType { get; set; }
 
-        public DbSet<HistoryFields> HistoryFields { get; set; }
+        public DbSet<ConfigPatternEvent> ConfigPatternEvent { get; set; }
 
-        public DbSet<Media> Media { get; set; }
+        public DbSet<ConfigPatternTrigger> ConfigPatternTrigger { get; set; }
 
-        public DbSet<SettingDefaultPatterns> SettingDefaultPatterns { get; set; }
+        public DbSet<ConfigTrigger> ConfigTrigger { get; set; }
 
-        public DbSet<SettingPatterns> SettingPatterns { get; set; }
+        public DbSet<TicketHistory> TicketHistory { get; set; }
 
-        public DbSet<SettingScripts> SettingScripts { get; set; }
+        public DbSet<EventHistory> EventHistory { get; set; }
 
-        public DbSet<SettingTriggers> SettingTriggers { get; set; }
+        public DbSet<User> User { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ConfigTrigger>()
+                .HasOne(p => p.ConfigEventType)
+                .WithMany(t => t.ConfigTriggers)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ConfigPatternEvent>()
+                .HasOne(p => p.ConfigEventType)
+                .WithMany(t => t.ConfigPatternsEvent)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ConfigPatternTrigger>()
+                .HasOne(p => p.ConfigTriggers)
+                .WithMany(t => t.ConfigPatternsTrigger)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
     }
-}
+    }
