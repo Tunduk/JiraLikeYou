@@ -20,6 +20,6 @@ namespace JiraLikeYou.DAL.Entities
 
         public ConfigEventType ConfigEventType { get; set; }
 
-        public ICollection<ConfigPatternTrigger> ConfigPatternsTrigger { get; set; }
+        public ICollection<ConfigPatternTrigger> ConfigPatternTrigger { get; set; }
     }
 }

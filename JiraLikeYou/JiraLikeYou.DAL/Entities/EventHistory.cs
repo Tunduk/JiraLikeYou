@@ -27,5 +27,7 @@ namespace JiraLikeYou.DAL.Entities
         public DateTime CreateDate { get; set; }
 
         public ConfigTrigger ConfigTrigger { get; set; }
+
+        public User User { get; set; }
     }
 }

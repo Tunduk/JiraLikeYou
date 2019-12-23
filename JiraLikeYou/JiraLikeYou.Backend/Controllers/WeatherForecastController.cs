@@ -11,6 +11,7 @@ namespace JiraLikeYou.Backend.Controllers
     public class WeatherForecastController : ControllerBase
     {
         private readonly IHubContext<EventHub> _hub;
+
         public WeatherForecastController(IHubContext<EventHub> hub)
         {
             _hub = hub;

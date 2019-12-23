@@ -38,12 +38,12 @@ namespace JiraLikeYou.DAL.Repositories
 
             modelBuilder.Entity<ConfigPatternEvent>()
                 .HasOne(p => p.ConfigEventType)
-                .WithMany(t => t.ConfigPatternsEvent)
+                .WithMany(t => t.ConfigPatternEvent)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<ConfigPatternTrigger>()
                 .HasOne(p => p.ConfigTriggers)
-                .WithMany(t => t.ConfigPatternsTrigger)
+                .WithMany(t => t.ConfigPatternTrigger)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

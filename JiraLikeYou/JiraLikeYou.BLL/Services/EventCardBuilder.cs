@@ -21,13 +21,11 @@ namespace JiraLikeYou.BLL.Services
     public class EventCardBuilder : IEventCardBuilder
     {
         private readonly IConfigRepository _configRepository;
-        private readonly IUserRepository _userRepository;
         private readonly Random _rand;
 
         public EventCardBuilder(IConfigRepository configRepository, IUserRepository userRepository)
         {
             _configRepository = configRepository;
-            _userRepository = userRepository;
             _rand = new Random();
         }
 
@@ -42,36 +40,42 @@ namespace JiraLikeYou.BLL.Services
 
         public EventSmallCard BuildSmallCard(EventHistory eventHistory)
         {
-            var trigger = _configRepository.GetConfigTrigger(eventHistory.ConfigTriggerId);
-            var eventPattern = _configRepository.GetConfigPatternEvent(trigger.ConfigEventTypeId);
-            var user = _userRepository.Get(eventHistory.UserEmail);
+            var eventPattern = GetConfigPatternEvent(eventHistory.ConfigTriggerId);
 
             return new EventSmallCard
             {
                 CreateDate = eventHistory.CreateDate,
-                ImageLink = user.AvatarLink,
+                ImageLink = eventHistory.User.AvatarLink,
                 Text = BuildText(eventPattern.Title, eventHistory)
-                       + eventPattern.Subtitle != "" ? BuildText(eventPattern.Subtitle, eventHistory) : ""
+                       + (String.IsNullOrEmpty(eventPattern.Subtitle) ? BuildText(eventPattern.Subtitle, eventHistory) : "")
             };
         }
 
         public EventFullCard BuildFullCard(EventHistory eventHistory)
         {
-            var trigger = _configRepository.GetConfigTrigger(eventHistory.ConfigTriggerId);
-            var eventPattern = _configRepository.GetConfigPatternEvent(trigger.ConfigEventTypeId);
-            var user = _userRepository.Get(eventHistory.UserEmail);
-
-            var triggerPatterns = _configRepository.GetConfigPatternTriggers(eventHistory.ConfigTriggerId).ToArray();
-            var triggerPattern = triggerPatterns[_rand.Next(triggerPatterns.Length)];
+            var eventPattern = GetConfigPatternEvent(eventHistory.ConfigTriggerId);
+            var triggerPattern = GetConfigRandomPatternTrigger(eventHistory.ConfigTriggerId);
 
             return new EventFullCard
             {
                 Title = BuildText(eventPattern.Title, eventHistory),
                 Subtitle = BuildText(eventPattern.Subtitle, eventHistory),
-                ImageLink = triggerPattern.ImageLink,
+                ImageLink = triggerPattern?.ImageLink,
                 SoundLink = eventPattern.SoundLink,
-                Text = BuildText(triggerPattern.Text, eventHistory),
+                Text = triggerPattern == null ? null : BuildText(triggerPattern.Text, eventHistory)
             };
+        }
+
+        private ConfigPatternEvent GetConfigPatternEvent(long triggerId)
+        {
+            var trigger = _configRepository.GetConfigTrigger(triggerId);
+            return _configRepository.GetConfigPatternEvent(trigger.ConfigEventTypeId);
+        }
+
+        private ConfigPatternTrigger GetConfigRandomPatternTrigger(long triggerId)
+        {
+            var triggerPatterns = _configRepository.GetConfigPatternTriggers(triggerId)?.ToArray();
+            return triggerPatterns?[_rand.Next(triggerPatterns.Length)];
         }
 
         //TODO: надо б сделать

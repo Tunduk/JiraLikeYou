@@ -4,6 +4,7 @@ namespace JiraLikeYou.DAL.Entities
 {
     public class ConfigPatternEvent
     {
+        [Key]
         public long Id { get; set; }
 
         public long ConfigEventTypeId { get; set; }
@@ -13,5 +14,7 @@ namespace JiraLikeYou.DAL.Entities
         public string Subtitle { get; set; }
 
         public string SoundLink { get; set; }
+
+        public ConfigEventType ConfigEventType { get; set; }
     }
 }

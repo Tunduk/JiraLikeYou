@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using JiraLikeYou.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace JiraLikeYou.DAL.Repositories
 {
@@ -24,17 +25,17 @@ namespace JiraLikeYou.DAL.Repositories
 
         public IEnumerable<EventHistory> Get()
         {
-            return _dataContext.EventHistory.AsEnumerable();
+            return _dataContext.EventHistory.Include(x => x.User).AsEnumerable();
         }
 
         public EventHistory GetLast()
         {
-            return _dataContext.EventHistory.FirstOrDefault(p => p.Id == _dataContext.EventHistory.Max(x => x.Id));
+            return _dataContext.EventHistory.Include(x => x.User).FirstOrDefault(p => p.Id == _dataContext.EventHistory.Max(x => x.Id));
         }
 
         public EventHistory Get(long id)
         {
-            return _dataContext.EventHistory.FirstOrDefault(x => x.Id == id);
+            return _dataContext.EventHistory.Include(x => x.User).FirstOrDefault(x => x.Id == id);
         }
     }
 }
