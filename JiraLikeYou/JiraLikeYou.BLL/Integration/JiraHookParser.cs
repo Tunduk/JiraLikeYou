@@ -1,6 +1,10 @@
 ﻿namespace JiraLikeYou.BLL.Integration
 {
-    public class JiraHookParser
+    public interface IJiraHookParser
+    {
+
+    }
+    public class JiraHookParser : IJiraHookParser
     {
     }
 }
