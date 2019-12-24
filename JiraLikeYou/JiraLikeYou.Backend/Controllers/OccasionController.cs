@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using JiraLikeYou.Backend.Mappers;
 using JiraLikeYou.BLL.Models;
 using JiraLikeYou.BLL.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -12,17 +14,21 @@ namespace JiraLikeYou.Backend.Controllers
     [ApiController]
     public class OccasionController : ControllerBase
     {
-        private readonly IUiClient _some;
+        private readonly IUiClient _uiClient;
+        private readonly OccasionSmallCardMapper _smallCardMapper;
+        private readonly OccasionFullCardMapper _fullCardMapper;
 
-        public OccasionController(IUiClient some)
+        public OccasionController(IUiClient uiClient, OccasionSmallCardMapper smallCardMapper, OccasionFullCardMapper fullCardMapper)
         {
-            _some = some;
+            _uiClient = uiClient;
+            _smallCardMapper = smallCardMapper;
+            _fullCardMapper = fullCardMapper;
         }
 
         [HttpGet]
         public IEnumerable<OccasionSmallCardDto> GetHistory()
         {
-            return _some.GetHistory();
+            return _uiClient.GetHistory().Select(x => _smallCardMapper.ToDto(x));
         }
 
         [HttpGet]

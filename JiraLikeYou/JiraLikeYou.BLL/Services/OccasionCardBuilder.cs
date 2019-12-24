@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using JiraLikeYou.BLL.Mappers;
 using JiraLikeYou.BLL.Models;
 using JiraLikeYou.DAL.Entities;
 using JiraLikeYou.DAL.Repositories;
@@ -23,10 +24,22 @@ namespace JiraLikeYou.BLL.Services
     public class OccasionCardBuilder : IOccasionCardBuilder
     {
         private readonly IConfigRepository _configRepository;
+        private readonly OccasionMapper _occasionMapper;
+        private readonly TriggerMapper _triggerMapper;
+        private readonly PatternForOccasionMapper _patternForOccasionMapper;
+        private readonly PatternForTriggerMapper _patternForTriggerMapper;
         
-        public OccasionCardBuilder(IConfigRepository configRepository, IUserRepository userRepository)
+        public OccasionCardBuilder(IConfigRepository configRepository,
+            OccasionMapper occasionMapper,
+            TriggerMapper triggerMapper,
+            PatternForOccasionMapper patternForOccasionMapper,
+            PatternForTriggerMapper patternForTriggerMapper)
         {
             _configRepository = configRepository;
+            _occasionMapper = occasionMapper;
+            _triggerMapper = triggerMapper;
+            _patternForOccasionMapper = patternForOccasionMapper;
+            _patternForTriggerMapper = patternForTriggerMapper;
         }
 
         public IEnumerable<string> GetFieldCode()
@@ -68,14 +81,16 @@ namespace JiraLikeYou.BLL.Services
 
         private PatternForOccasion GetPatternForOccasion(long triggerId)
         {
-            var trigger = _configRepository.GetTrigger(triggerId);
-            return _configRepository.GetPatternForOccasion(trigger.OccasionTypeId);
+            var trigger = _triggerMapper.ToBll(_configRepository.GetTrigger(triggerId));
+            return _patternForOccasionMapper.ToBll(_configRepository.GetPatternForOccasion(trigger.OccasionTypeId));
         }
 
         private PatternForTrigger GetRandomPatternForTrigger(long triggerId)
         {
             var rand = new Random();
-            var triggerPatterns = _configRepository.GetPatternForTriggers(triggerId)?.ToArray();
+            var triggerPatterns = _configRepository.GetPatternForTriggers(triggerId)
+                ?.Select(x => _patternForTriggerMapper.ToBll(x))
+                .ToArray();
             return triggerPatterns?[rand.Next(triggerPatterns.Length)];
         }
 
