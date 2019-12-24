@@ -12,6 +12,8 @@ namespace JiraLikeYou.DAL.Repositories
         Occasion GetLast();
 
         Occasion Get(long id);
+
+        void Add(Occasion occasion);
     }
 
     public class OccasionRepository : IOccasionRepository
@@ -25,17 +27,31 @@ namespace JiraLikeYou.DAL.Repositories
 
         public IEnumerable<Occasion> Get()
         {
-            return _dataContext.Occasion.Include(x => x.User).AsEnumerable();
+            return _dataContext.Occasions
+                .Include(x => x.User)
+                .Include(x => x.Ticket)?
+                .AsEnumerable();
         }
 
         public Occasion GetLast()
         {
-            return _dataContext.Occasion.Include(x => x.User).FirstOrDefault(p => p.Id == _dataContext.Occasion.Max(x => x.Id));
+            return _dataContext.Occasions
+                .Include(x => x.User)
+                .Include(x => x.Ticket)?
+                .FirstOrDefault(p => p.Id == _dataContext.Occasions.Max(x => x.Id));
         }
 
         public Occasion Get(long id)
         {
-            return _dataContext.Occasion.Include(x => x.User).FirstOrDefault(x => x.Id == id);
+            return _dataContext.Occasions.Include(x => x.User)
+                .Include(x => x.Ticket)?
+                .FirstOrDefault(x => x.Id == id);
+        }
+
+        public void Add(Occasion occasion)
+        {
+            _dataContext.Occasions.Add(occasion);
+            _dataContext.SaveChanges();
         }
     }
 }

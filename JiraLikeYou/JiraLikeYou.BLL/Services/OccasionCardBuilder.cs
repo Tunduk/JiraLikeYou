@@ -6,6 +6,8 @@ using System.Text;
 using JiraLikeYou.BLL.Models;
 using JiraLikeYou.DAL.Entities;
 using JiraLikeYou.DAL.Repositories;
+using Occasion = JiraLikeYou.BLL.Models.Occasion;
+using PatternForTrigger = JiraLikeYou.BLL.Models.PatternForTrigger;
 
 namespace JiraLikeYou.BLL.Services
 {
@@ -21,12 +23,10 @@ namespace JiraLikeYou.BLL.Services
     public class OccasionCardBuilder : IOccasionCardBuilder
     {
         private readonly IConfigRepository _configRepository;
-        private readonly Random _rand;
-
+        
         public OccasionCardBuilder(IConfigRepository configRepository, IUserRepository userRepository)
         {
             _configRepository = configRepository;
-            _rand = new Random();
         }
 
         public IEnumerable<string> GetFieldCode()
@@ -40,7 +40,7 @@ namespace JiraLikeYou.BLL.Services
 
         public OccasionSmallCard BuildSmallCard(Occasion occasion)
         {
-            var occasionPattern = GetConfigPatternOccasion(occasion.ConfigTriggerId);
+            var occasionPattern = GetPatternForOccasion(occasion.TriggerId);
 
             return new OccasionSmallCard
             {
@@ -53,8 +53,8 @@ namespace JiraLikeYou.BLL.Services
 
         public OccasionFullCard BuildFullCard(Occasion occasion)
         {
-            var occasionPattern = GetConfigPatternOccasion(occasion.ConfigTriggerId);
-            var triggerPattern = GetConfigRandomPatternTrigger(occasion.ConfigTriggerId);
+            var occasionPattern = GetPatternForOccasion(occasion.TriggerId);
+            var triggerPattern = GetRandomPatternForTrigger(occasion.TriggerId);
 
             return new OccasionFullCard
             {
@@ -66,16 +66,17 @@ namespace JiraLikeYou.BLL.Services
             };
         }
 
-        private ConfigPatternOccasion GetConfigPatternOccasion(long triggerId)
+        private PatternForOccasion GetPatternForOccasion(long triggerId)
         {
-            var trigger = _configRepository.GetConfigTrigger(triggerId);
-            return _configRepository.GetConfigPatternOccasion(trigger.ConfigOccasionTypeId);
+            var trigger = _configRepository.GetTrigger(triggerId);
+            return _configRepository.GetPatternForOccasion(trigger.OccasionTypeId);
         }
 
-        private ConfigPatternTrigger GetConfigRandomPatternTrigger(long triggerId)
+        private PatternForTrigger GetRandomPatternForTrigger(long triggerId)
         {
-            var triggerPatterns = _configRepository.GetConfigPatternTriggers(triggerId)?.ToArray();
-            return triggerPatterns?[_rand.Next(triggerPatterns.Length)];
+            var rand = new Random();
+            var triggerPatterns = _configRepository.GetPatternForTriggers(triggerId)?.ToArray();
+            return triggerPatterns?[rand.Next(triggerPatterns.Length)];
         }
 
         //TODO: надо б сделать

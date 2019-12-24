@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using JiraLikeYou.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace JiraLikeYou.DAL.Repositories
 {
     public interface IConfigRepository
     {
-        ConfigOccasionType GetConfigOccasionType(string code);
+        OccasionType GetOccasionType(string code);
 
-        ConfigTrigger GetConfigTrigger(long id);
+        Trigger GetTrigger(long id);
 
-        ConfigPatternOccasion GetConfigPatternOccasion(long occasionId);
+        PatternForOccasionType GetPatternForOccasion(long id);
 
-        IEnumerable<ConfigPatternTrigger> GetConfigPatternTriggers(long triggerId);
+        IEnumerable<PatternForTrigger> GetPatternForTriggers(long id);
     }
 
     public class ConfigRepository : IConfigRepository
@@ -24,24 +25,26 @@ namespace JiraLikeYou.DAL.Repositories
             _dataContext = dataContext;
         }
 
-        public ConfigOccasionType GetConfigOccasionType(string code)
+        public OccasionType GetOccasionType(string code)
         {
-            return _dataContext.ConfigOccasionType.SingleOrDefault(x => x.Code == code);
+            return _dataContext.OccasionTypes
+                .Include(x => x.Triggers)
+                .SingleOrDefault(x => x.Code == code);
         }
 
-        public ConfigTrigger GetConfigTrigger(long id)
+        public Trigger GetTrigger(long id)
         {
-            return _dataContext.ConfigTrigger.SingleOrDefault(x => x.Id == id);
+            return _dataContext.Triggers.SingleOrDefault(x => x.Id == id);
         }
 
-        public ConfigPatternOccasion GetConfigPatternOccasion(long occasionId)
+        public PatternForOccasionType GetPatternForOccasion(long id)
         {
-            return _dataContext.ConfigPatternOccasion.SingleOrDefault(x => x.ConfigOccasionTypeId == occasionId);
+            return _dataContext.PatternsForOccasion.SingleOrDefault(x => x.OccasionTypeId == id);
         }
 
-        public IEnumerable<ConfigPatternTrigger> GetConfigPatternTriggers(long triggerId)
+        public IEnumerable<PatternForTrigger> GetPatternForTriggers(long id)
         {
-            return _dataContext.ConfigPatternTrigger.Where(x => x.ConfigTriggerId == triggerId);
+            return _dataContext.PatternsForTrigger.Where(x => x.TriggerId == id);
         }
     }
 }

@@ -1,5 +1,6 @@
 using JiraLikeYou.DAL.Repositories;
 using JiraLikeYou.Backend.Hubs;
+using JiraLikeYou.Backend.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using JiraLikeYou.BLL.Integration;
+using JiraLikeYou.BLL.Mappers;
 
 namespace JiraLikeYou.Backend
 {
@@ -64,14 +66,29 @@ namespace JiraLikeYou.Backend
             ));
 
             services.AddTransient<IJiraHookParser, JiraHookParser>();
+            AddMappers(services);
             AddRepositories(services);
         }
 
         private void AddRepositories(IServiceCollection services)
         {
             services.AddTransient<IConfigRepository, ConfigRepository>();
-            services.AddTransient<IEventHistoryRepository, EventHistoryRepository>();
+            services.AddTransient<IOccasionRepository, OccasionRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<ITicketRepository, TicketRepository>();
+        }
+
+        private void AddMappers(IServiceCollection services)
+        {
+            services.AddTransient<OccasionSmallCardMapper>();
+            services.AddTransient<OccasionFullCardMapper>();
+            services.AddTransient<UserMapper>();
+            services.AddTransient<TicketMapper>();
+            services.AddTransient<OccasionMapper>();
+            services.AddTransient<OccasionTypeMapper>();
+            services.AddTransient<TriggerMapper>();
+            services.AddTransient<PatternForOccasionMapper>();
+            services.AddTransient<PatternForTriggerMapper>();
         }
 
         private void AutoMigrateDatabase(IApplicationBuilder app)

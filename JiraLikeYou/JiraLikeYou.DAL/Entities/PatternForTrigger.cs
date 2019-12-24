@@ -2,17 +2,17 @@
 
 namespace JiraLikeYou.DAL.Entities
 {
-    public class ConfigPatternTrigger
+    public class PatternForTrigger
     {
         [Key]
         public long Id { get; set; }
 
-        public long ConfigTriggerId { get; set; }
+        public long TriggerId { get; set; }
 
         public string Text { get; set; }
 
         public string ImageLink { get; set; }
 
-        public ConfigTrigger ConfigTriggers { get; set; }
+        public Trigger Triggers { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace JiraLikeYou.DAL.Entities
 {
-    public class ConfigOccasionType
+    public class OccasionType
     {
         [Key]
         public long Id { get; set; }
@@ -12,8 +12,8 @@ namespace JiraLikeYou.DAL.Entities
 
         public string Name { get; set; }
 
-        public ICollection<ConfigTrigger> ConfigTriggers { get; set; }
+        public ICollection<Trigger> Triggers { get; set; }
 
-        public ICollection<ConfigPatternOccasion> ConfigPatternOccasion { get; set; }
+        public ICollection<PatternForOccasionType> PatternsForOccasion { get; set; }
     }
 }

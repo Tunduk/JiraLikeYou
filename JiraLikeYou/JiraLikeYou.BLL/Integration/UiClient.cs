@@ -6,17 +6,17 @@ using JiraLikeYou.DAL.Repositories;
 
 namespace JiraLikeYou.BLL.Services
 {
-    public interface ISomeThingForClient
+    public interface IUiClient
     {
         IEnumerable<OccasionSmallCard> GetHistory();
     }
 
-    public class SomeThingForClient : ISomeThingForClient
+    public class UiClient : IUiClient
     {
         private readonly IOccasionCardBuilder _cardBuilder;
         private readonly IOccasionRepository _occasionRepository;
 
-        public SomeThingForClient(IOccasionCardBuilder cardBuilder, IOccasionRepository occasionRepository)
+        public UiClient(IOccasionCardBuilder cardBuilder, IOccasionRepository occasionRepository)
         {
             _cardBuilder = cardBuilder;
             _occasionRepository = occasionRepository;

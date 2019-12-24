@@ -2,12 +2,12 @@
 
 namespace JiraLikeYou.DAL.Entities
 {
-    public class ConfigPatternOccasion
+    public class PatternForOccasionType
     {
         [Key]
         public long Id { get; set; }
 
-        public long ConfigOccasionTypeId { get; set; }
+        public long OccasionTypeId { get; set; }
 
         public string Title { get; set; }
 
@@ -15,6 +15,6 @@ namespace JiraLikeYou.DAL.Entities
 
         public string SoundLink { get; set; }
 
-        public ConfigOccasionType ConfigOccasionType { get; set; }
+        public OccasionType OccasionType { get; set; }
     }
 }

@@ -22,22 +22,22 @@ namespace JiraLikeYou.DAL.Repositories
 
         public User Get(string email)
         {
-            return _dataContext.User.FirstOrDefault(x => x.Email == email);
+            return _dataContext.Users.FirstOrDefault(x => x.Email == email);
         }
 
         public void UpdateOrCreate(User user)
         {
-            var oldUser = _dataContext.User.SingleOrDefault(x => x.Email == user.Email);
+            var oldUser = _dataContext.Users.SingleOrDefault(x => x.Email == user.Email);
 
             if (oldUser == null)
             {
-                _dataContext.User.Add(user);
+                _dataContext.Users.Add(user);
             }
-
             else if(oldUser.AvatarLink != user.AvatarLink || oldUser.Name != user.Name)
             {
-                _dataContext.User.Update(user);
+                _dataContext.Users.Update(user);
             }
+            _dataContext.SaveChanges();
         }
     }
 }

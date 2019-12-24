@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace JiraLikeYou.DAL.Entities
 {
-    public class ConfigTrigger
+    public class Trigger
     {
         [Key]
         public long Id { get; set; }
 
-        public long ConfigOccasionTypeId { get; set; }
+        public long OccasionTypeId { get; set; }
 
         public string Status { get; set; }
 
@@ -18,8 +18,8 @@ namespace JiraLikeYou.DAL.Entities
 
         public int CountTickets { get; set; }
 
-        public ConfigOccasionType ConfigOccasionType { get; set; }
+        public OccasionType OccasionType { get; set; }
 
-        public ICollection<ConfigPatternTrigger> ConfigPatternTrigger { get; set; }
+        public ICollection<PatternForTrigger> PatternsForTrigger { get; set; }
     }
 }

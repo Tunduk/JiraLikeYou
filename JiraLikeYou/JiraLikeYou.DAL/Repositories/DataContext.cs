@@ -15,35 +15,35 @@ namespace JiraLikeYou.DAL.Repositories
         {
         }
 
-        public DbSet<ConfigOccasionType> ConfigOccasionType { get; set; }
+        public DbSet<OccasionType> OccasionTypes { get; set; }
 
-        public DbSet<ConfigPatternOccasion> ConfigPatternOccasion { get; set; }
+        public DbSet<PatternForOccasionType> PatternsForOccasion { get; set; }
 
-        public DbSet<ConfigPatternTrigger> ConfigPatternTrigger { get; set; }
+        public DbSet<PatternForTrigger> PatternsForTrigger { get; set; }
 
-        public DbSet<ConfigTrigger> ConfigTrigger { get; set; }
+        public DbSet<Trigger> Triggers { get; set; }
 
-        public DbSet<Ticket> Ticket { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
 
-        public DbSet<Occasion> Occasion { get; set; }
+        public DbSet<Occasion> Occasions { get; set; }
 
-        public DbSet<User> User { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ConfigTrigger>()
-                .HasOne(p => p.ConfigOccasionType)
-                .WithMany(t => t.ConfigTriggers)
+            modelBuilder.Entity<Trigger>()
+                .HasOne(p => p.OccasionType)
+                .WithMany(t => t.Triggers)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<ConfigPatternOccasion>()
-                .HasOne(p => p.ConfigOccasionType)
-                .WithMany(t => t.ConfigPatternOccasion)
+            modelBuilder.Entity<PatternForOccasionType>()
+                .HasOne(p => p.OccasionType)
+                .WithMany(t => t.PatternsForOccasion)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<ConfigPatternTrigger>()
-                .HasOne(p => p.ConfigTriggers)
-                .WithMany(t => t.ConfigPatternTrigger)
+            modelBuilder.Entity<PatternForTrigger>()
+                .HasOne(p => p.Triggers)
+                .WithMany(t => t.PatternsForTrigger)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

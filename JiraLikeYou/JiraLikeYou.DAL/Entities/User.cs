@@ -12,5 +12,7 @@ namespace JiraLikeYou.DAL.Entities
         public string Name { get; set; }
 
         public string AvatarLink { get; set; }
+
+        public ICollection<Occasion> Occasions { get; set; }
     }
 }

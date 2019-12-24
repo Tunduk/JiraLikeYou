@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using JiraLikeYou.BLL.Models;
 using JiraLikeYou.BLL.Services;
 using Microsoft.AspNetCore.Mvc;
+using OccasionFullCardDto = JiraLikeYou.Backend.Dto.OccasionFullCardDto;
+using OccasionSmallCardDto = JiraLikeYou.Backend.Dto.OccasionSmallCardDto;
 
 namespace JiraLikeYou.Backend.Controllers
 {
@@ -10,21 +12,21 @@ namespace JiraLikeYou.Backend.Controllers
     [ApiController]
     public class OccasionController : ControllerBase
     {
-        private readonly ISomeThingForClient _some;
+        private readonly IUiClient _some;
 
-        public OccasionController(ISomeThingForClient some)
+        public OccasionController(IUiClient some)
         {
             _some = some;
         }
 
         [HttpGet]
-        public IEnumerable<OccasionSmallCard> GetHistory()
+        public IEnumerable<OccasionSmallCardDto> GetHistory()
         {
             return _some.GetHistory();
         }
 
         [HttpGet]
-        public OccasionFullCard GetOccasionCard()
+        public OccasionFullCardDto GetOccasionCard()
         {
             throw new NotImplementedException();
         }
