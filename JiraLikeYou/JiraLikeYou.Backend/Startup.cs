@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using JiraLikeYou.BLL.Integration;
 
 namespace JiraLikeYou.Backend
 {
@@ -21,6 +22,7 @@ namespace JiraLikeYou.Backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Need for SignalR(need some investigaion about CORS for security reasons)
             services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
             {
                 builder
@@ -30,11 +32,8 @@ namespace JiraLikeYou.Backend
                     .WithOrigins("http://localhost:52001");
             }));
             services.AddControllers();
-            services.AddDbContext<DataContext>(
-                options => options.UseSqlite(Configuration.GetConnectionString("Db")
-                ));
             services.AddSignalR();
-            
+            ConfigureContainer(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +54,33 @@ namespace JiraLikeYou.Backend
                 endpoints.MapHub<EventHub>("/jiraHub");
             });
 
+            AutoMigrateDatabase(app);
+        }
+
+        private void ConfigureContainer(IServiceCollection services)
+        {
+            services.AddDbContext<DataContext>(
+                options => options.UseSqlite(Configuration.GetConnectionString("Db")
+            ));
+
+            services.AddTransient<IJiraHookParser, JiraHookParser>();
+            AddRepositories(services);
+        }
+
+        private void AddRepositories(IServiceCollection services)
+        {
+            services.AddTransient<IConfigRepository, ConfigRepository>();
+            services.AddTransient<IEventHistoryRepository, EventHistoryRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
+        }
+
+        private void AutoMigrateDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<DataContext>();
+                context.Database.Migrate();
+            }
         }
     }
 }

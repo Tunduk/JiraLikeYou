@@ -22,7 +22,7 @@ namespace JiraLikeYou.DAL.Repositories
 
         public User Get(string email)
         {
-            return _dataContext.User.SingleOrDefault(x => x.Email == email);
+            return _dataContext.User.FirstOrDefault(x => x.Email == email);
         }
 
         public void UpdateOrCreate(User user)

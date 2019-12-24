@@ -499,3 +499,4 @@ fabric.properties
 
 # End of https://www.gitignore.io/api/csharp,jetbrains,visualstudio
 /src/Kharon.Backend/devKharonsrcKharon.BackendbinReleasenetcoreapp2.1win10-x64
+/JiraLikeYou/JiraLikeYou.Backend/jiraLikeYou.sqlite
