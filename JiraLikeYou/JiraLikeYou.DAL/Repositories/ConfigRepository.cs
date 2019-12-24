@@ -6,11 +6,11 @@ namespace JiraLikeYou.DAL.Repositories
 {
     public interface IConfigRepository
     {
-        ConfigEventType GetConfigEventType(string code);
+        ConfigOccasionType GetConfigOccasionType(string code);
 
         ConfigTrigger GetConfigTrigger(long id);
 
-        ConfigPatternEvent GetConfigPatternEvent(long eventId);
+        ConfigPatternOccasion GetConfigPatternOccasion(long occasionId);
 
         IEnumerable<ConfigPatternTrigger> GetConfigPatternTriggers(long triggerId);
     }
@@ -24,9 +24,9 @@ namespace JiraLikeYou.DAL.Repositories
             _dataContext = dataContext;
         }
 
-        public ConfigEventType GetConfigEventType(string code)
+        public ConfigOccasionType GetConfigOccasionType(string code)
         {
-            return _dataContext.ConfigEventType.SingleOrDefault(x => x.Code == code);
+            return _dataContext.ConfigOccasionType.SingleOrDefault(x => x.Code == code);
         }
 
         public ConfigTrigger GetConfigTrigger(long id)
@@ -34,9 +34,9 @@ namespace JiraLikeYou.DAL.Repositories
             return _dataContext.ConfigTrigger.SingleOrDefault(x => x.Id == id);
         }
 
-        public ConfigPatternEvent GetConfigPatternEvent(long eventId)
+        public ConfigPatternOccasion GetConfigPatternOccasion(long occasionId)
         {
-            return _dataContext.ConfigPatternEvent.SingleOrDefault(x => x.ConfigEventTypeId == eventId);
+            return _dataContext.ConfigPatternOccasion.SingleOrDefault(x => x.ConfigOccasionTypeId == occasionId);
         }
 
         public IEnumerable<ConfigPatternTrigger> GetConfigPatternTriggers(long triggerId)

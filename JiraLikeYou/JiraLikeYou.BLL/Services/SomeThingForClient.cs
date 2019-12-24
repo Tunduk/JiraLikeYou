@@ -8,27 +8,27 @@ namespace JiraLikeYou.BLL.Services
 {
     public interface ISomeThingForClient
     {
-        IEnumerable<EventSmallCard> GetHistory();
+        IEnumerable<OccasionSmallCard> GetHistory();
     }
 
     public class SomeThingForClient : ISomeThingForClient
     {
-        private readonly IEventCardBuilder _cardBuilder;
-        private readonly IEventHistoryRepository _eventHistoryRepository;
+        private readonly IOccasionCardBuilder _cardBuilder;
+        private readonly IOccasionRepository _occasionRepository;
 
-        public SomeThingForClient(IEventCardBuilder cardBuilder, IEventHistoryRepository eventHistoryRepository)
+        public SomeThingForClient(IOccasionCardBuilder cardBuilder, IOccasionRepository occasionRepository)
         {
             _cardBuilder = cardBuilder;
-            _eventHistoryRepository = eventHistoryRepository;
+            _occasionRepository = occasionRepository;
         }
 
-        public IEnumerable<EventSmallCard> GetHistory()
+        public IEnumerable<OccasionSmallCard> GetHistory()
         {
-            var events = _eventHistoryRepository.Get();
+            var occasions = _occasionRepository.Get();
 
-            foreach (var ev in events)
+            foreach (var occasion in occasions)
             {
-                yield return _cardBuilder.BuildSmallCard(ev);
+                yield return _cardBuilder.BuildSmallCard(occasion);
             }
         }
     }

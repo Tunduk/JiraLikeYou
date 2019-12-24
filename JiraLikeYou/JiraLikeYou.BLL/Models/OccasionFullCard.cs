@@ -2,7 +2,7 @@
 
 namespace JiraLikeYou.BLL.Models
 {
-    public class EventFullCard
+    public class OccasionFullCard
     {
         public string Title { get; set; }
 

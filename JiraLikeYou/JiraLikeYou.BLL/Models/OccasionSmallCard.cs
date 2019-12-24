@@ -2,7 +2,7 @@
 
 namespace JiraLikeYou.BLL.Models
 {
-    public class EventSmallCard
+    public class OccasionSmallCard
     {
         public DateTime CreateDate { get; set; }
 

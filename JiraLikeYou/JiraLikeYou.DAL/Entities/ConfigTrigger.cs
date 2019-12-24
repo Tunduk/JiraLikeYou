@@ -8,7 +8,7 @@ namespace JiraLikeYou.DAL.Entities
         [Key]
         public long Id { get; set; }
 
-        public long ConfigEventTypeId { get; set; }
+        public long ConfigOccasionTypeId { get; set; }
 
         public string Status { get; set; }
 
@@ -18,7 +18,7 @@ namespace JiraLikeYou.DAL.Entities
 
         public int CountTickets { get; set; }
 
-        public ConfigEventType ConfigEventType { get; set; }
+        public ConfigOccasionType ConfigOccasionType { get; set; }
 
         public ICollection<ConfigPatternTrigger> ConfigPatternTrigger { get; set; }
     }

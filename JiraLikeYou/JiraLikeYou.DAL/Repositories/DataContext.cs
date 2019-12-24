@@ -15,30 +15,30 @@ namespace JiraLikeYou.DAL.Repositories
         {
         }
 
-        public DbSet<ConfigEventType> ConfigEventType { get; set; }
+        public DbSet<ConfigOccasionType> ConfigOccasionType { get; set; }
 
-        public DbSet<ConfigPatternEvent> ConfigPatternEvent { get; set; }
+        public DbSet<ConfigPatternOccasion> ConfigPatternOccasion { get; set; }
 
         public DbSet<ConfigPatternTrigger> ConfigPatternTrigger { get; set; }
 
         public DbSet<ConfigTrigger> ConfigTrigger { get; set; }
 
-        public DbSet<TicketHistory> TicketHistory { get; set; }
+        public DbSet<Ticket> Ticket { get; set; }
 
-        public DbSet<EventHistory> EventHistory { get; set; }
+        public DbSet<Occasion> Occasion { get; set; }
 
         public DbSet<User> User { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ConfigTrigger>()
-                .HasOne(p => p.ConfigEventType)
+                .HasOne(p => p.ConfigOccasionType)
                 .WithMany(t => t.ConfigTriggers)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<ConfigPatternEvent>()
-                .HasOne(p => p.ConfigEventType)
-                .WithMany(t => t.ConfigPatternEvent)
+            modelBuilder.Entity<ConfigPatternOccasion>()
+                .HasOne(p => p.ConfigOccasionType)
+                .WithMany(t => t.ConfigPatternOccasion)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<ConfigPatternTrigger>()

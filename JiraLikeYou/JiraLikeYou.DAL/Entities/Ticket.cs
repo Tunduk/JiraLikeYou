@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace JiraLikeYou.DAL.Entities
 {
-    public class TicketHistory
+    public class Ticket
     {
         [Key]
         public long Id { get; set; }
@@ -19,5 +20,7 @@ namespace JiraLikeYou.DAL.Entities
         public string UserEmail { get; set; }
 
         public DateTime CreateDate { get; set; }
+
+        public ICollection<Occasion> Occasions { get; set; }
     }
 }

@@ -3,22 +3,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace JiraLikeYou.DAL.Entities
 {
-    public class EventHistory
+    public class Occasion
     {
         [Key]
         public long Id { get; set; }
 
         public long ConfigTriggerId { get; set; }
 
-        public string UserEmail { get; set; }
+        public long? TicketId { get; set; }
 
-        public string TicketKey { get; set; }
-
-        public string TicketName { get; set; }
-
-        public string Status { get; set; }
-
-        public string Priority { get; set; }
+        public long? UserLogin { get; set; }
 
         public int DaysInStatus { get; set; }
 
@@ -29,5 +23,7 @@ namespace JiraLikeYou.DAL.Entities
         public ConfigTrigger ConfigTrigger { get; set; }
 
         public User User { get; set; }
+
+        public Ticket Ticket { get; set; }
     }
 }
