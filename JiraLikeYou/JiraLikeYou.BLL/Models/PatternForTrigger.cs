@@ -1,6 +1,4 @@
-﻿using JiraLikeYou.DAL.Entities;
-
-namespace JiraLikeYou.BLL.Models
+﻿namespace JiraLikeYou.BLL.Models
 {
     public class PatternForTrigger
     {

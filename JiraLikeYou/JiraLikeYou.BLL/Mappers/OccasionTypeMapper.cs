@@ -7,6 +7,11 @@ namespace JiraLikeYou.BLL.Mappers
     {
         private readonly TriggerMapper _triggerMapper;
 
+        public OccasionTypeMapper(TriggerMapper triggerMapper)
+        {
+            _triggerMapper = triggerMapper;
+        }
+
         public OccasionType ToBll(DAL.Entities.OccasionType dal)
         {
             return dal == null

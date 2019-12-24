@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using JiraLikeYou.BLL.Mappers;
+﻿using JiraLikeYou.BLL.Mappers;
 using JiraLikeYou.BLL.Models;
 using JiraLikeYou.DAL.Repositories;
 

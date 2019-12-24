@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using JiraLikeYou.Backend.Mappers;
-using JiraLikeYou.BLL.Models;
 using JiraLikeYou.BLL.Services;
 using Microsoft.AspNetCore.Mvc;
 using OccasionFullCardDto = JiraLikeYou.Backend.Dto.OccasionFullCardDto;
@@ -31,12 +30,10 @@ namespace JiraLikeYou.Backend.Controllers
             return _uiClient.GetHistory().Select(x => _smallCardMapper.ToDto(x));
         }
 
-        [HttpGet]
-        public OccasionFullCardDto GetOccasionCard()
+        [HttpGet("card")]
+        public OccasionFullCardDto GetLastCard()
         {
-            throw new NotImplementedException();
+            return _fullCardMapper.ToDto(_uiClient.GetLastCard());
         }
-
-
     }
 }

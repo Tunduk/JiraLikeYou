@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace JiraLikeYou.BLL.Models
+﻿namespace JiraLikeYou.BLL.Models
 {
     public class OccasionFullCard
     {

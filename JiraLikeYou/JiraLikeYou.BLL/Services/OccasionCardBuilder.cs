@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using JiraLikeYou.BLL.Mappers;
 using JiraLikeYou.BLL.Models;
-using JiraLikeYou.DAL.Entities;
 using JiraLikeYou.DAL.Repositories;
 using Occasion = JiraLikeYou.BLL.Models.Occasion;
 using PatternForTrigger = JiraLikeYou.BLL.Models.PatternForTrigger;

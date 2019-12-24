@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using JiraLikeYou.Backend.Dto;
+﻿using JiraLikeYou.Backend.Dto;
 using JiraLikeYou.Backend.Mappers;
 using JiraLikeYou.BLL.Integration;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JiraLikeYou.Backend.Controllers

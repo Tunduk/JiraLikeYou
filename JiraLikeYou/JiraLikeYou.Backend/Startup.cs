@@ -91,6 +91,7 @@ namespace JiraLikeYou.Backend
             services.AddTransient<IOccasionCardBuilder, OccasionCardBuilder>();
             services.AddTransient<IUserUpdater, UserUpdater>();
             services.AddTransient<ITicketCreator, TicketCreator>();
+            services.AddTransient<IOccasionHandler, OccasionHandler>();
         }
 
         private void AddMappers(IServiceCollection services)

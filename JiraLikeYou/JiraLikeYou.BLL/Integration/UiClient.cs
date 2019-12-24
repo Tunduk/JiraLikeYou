@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using JiraLikeYou.BLL.Mappers;
 using JiraLikeYou.BLL.Models;
 using JiraLikeYou.DAL.Repositories;
@@ -10,6 +8,9 @@ namespace JiraLikeYou.BLL.Services
     public interface IUiClient
     {
         IEnumerable<OccasionSmallCard> GetHistory();
+
+        OccasionFullCard GetLastCard();
+        void SendOccasion(Occasion occasion);
     }
 
     public class UiClient : IUiClient
@@ -33,6 +34,16 @@ namespace JiraLikeYou.BLL.Services
             {
                 yield return _cardBuilder.BuildSmallCard(_occasionMapper.ToBll(occasion));
             }
+        }
+
+        public OccasionFullCard GetLastCard()
+        {
+            return _cardBuilder.BuildFullCard(_occasionMapper.ToBll(_occasionRepository.GetLast()));
+        }
+
+        public void SendOccasion(Occasion occasion)
+        {
+
         }
     }
 }

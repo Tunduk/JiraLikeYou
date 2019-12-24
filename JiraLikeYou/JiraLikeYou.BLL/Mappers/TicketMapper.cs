@@ -1,5 +1,4 @@
-﻿using System;
-using JiraLikeYou.BLL.Models;
+﻿using JiraLikeYou.BLL.Models;
 
 namespace JiraLikeYou.BLL.Mappers
 {

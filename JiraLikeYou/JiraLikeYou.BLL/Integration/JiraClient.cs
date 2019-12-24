@@ -1,9 +1,5 @@
-﻿using JiraLikeYou.BLL.Mappers;
-using JiraLikeYou.BLL.Models;
+﻿using JiraLikeYou.BLL.Models;
 using JiraLikeYou.BLL.Services;
-using JiraLikeYou.DAL.Entities;
-using JiraLikeYou.DAL.Repositories;
-using User = JiraLikeYou.BLL.Models.User;
 
 namespace JiraLikeYou.BLL.Integration
 {

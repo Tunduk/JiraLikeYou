@@ -12,27 +12,31 @@ namespace JiraLikeYou.BLL.Services
     {
         private readonly ITicketRepository _ticketRepository;
         private readonly TicketMapper _ticketMapper;
+        private readonly IOccasionHandler _occasionHandler;
 
-        public TicketCreator(ITicketRepository ticketRepository, TicketMapper ticketMapper)
+        public TicketCreator(ITicketRepository ticketRepository, TicketMapper ticketMapper, IOccasionHandler occasionHandler)
         {
             _ticketRepository = ticketRepository;
             _ticketMapper = ticketMapper;
+            _occasionHandler = occasionHandler;
         }
 
         public void Create(JiraWebhookResponse response)
         {
             if (_ticketRepository.Get(response.Key, response.Status) == null)
             {
-                _ticketRepository.Create(_ticketMapper.ToDal(new Ticket
+                var newTicket = new Ticket
                 {
                     Key = response.Key,
                     Name = response.Name,
                     Status = response.Status,
                     Priority = response.Priority,
                     UserEmail = response.User.Email
-                }));
+                };
 
-                //тык
+                _ticketRepository.Create(_ticketMapper.ToDal(newTicket));
+
+                _occasionHandler.HandleNewTicket(newTicket);
             }
         }
     }

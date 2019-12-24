@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using JiraLikeYou.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace JiraLikeYou.DAL.Repositories
 {

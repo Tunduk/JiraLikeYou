@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace JiraLikeYou.BLL.Models
+﻿namespace JiraLikeYou.BLL.Models
 {
     public class Trigger
     {

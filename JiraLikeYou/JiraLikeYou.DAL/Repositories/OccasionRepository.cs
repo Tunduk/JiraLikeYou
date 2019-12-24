@@ -14,7 +14,7 @@ namespace JiraLikeYou.DAL.Repositories
 
         Occasion Get(long id);
 
-        void Add(Occasion occasion);
+        void Create(Occasion occasion);
     }
 
     public class OccasionRepository : IOccasionRepository
@@ -49,7 +49,7 @@ namespace JiraLikeYou.DAL.Repositories
                 .FirstOrDefault(x => x.Id == id);
         }
 
-        public void Add(Occasion occasion)
+        public void Create(Occasion occasion)
         {
             occasion.CreateDate = DateTime.Now;
             _dataContext.Occasions.Add(occasion);
