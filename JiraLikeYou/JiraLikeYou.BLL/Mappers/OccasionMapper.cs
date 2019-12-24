@@ -34,7 +34,6 @@ namespace JiraLikeYou.BLL.Mappers
                 TriggerId = bll.TriggerId,
                 DaysInStatus = bll.DaysInStatus,
                 CountTickets = bll.CountTickets,
-                CreateDate = bll.CreateDate,
                 UserEmail = bll.User.Email,
                 TicketId = bll.Ticket?.Id
             };

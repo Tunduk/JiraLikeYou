@@ -14,6 +14,8 @@ namespace JiraLikeYou.BLL.Models
 
         public string Priority { get; set; }
 
+        public string UserEmail { get; set; }
+
         public DateTime CreateDate { get; set; }
     }
 }

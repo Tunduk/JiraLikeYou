@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using JiraLikeYou.BLL.Integration;
 using JiraLikeYou.BLL.Mappers;
+using JiraLikeYou.BLL.Services;
 
 namespace JiraLikeYou.Backend
 {
@@ -65,8 +66,9 @@ namespace JiraLikeYou.Backend
                 options => options.UseSqlite(Configuration.GetConnectionString("Db")
             ));
 
-            services.AddTransient<IJiraHookParser, JiraHookParser>();
+            AddClients(services);
             AddMappers(services);
+            AddServices(services);
             AddRepositories(services);
         }
 
@@ -76,6 +78,19 @@ namespace JiraLikeYou.Backend
             services.AddTransient<IOccasionRepository, OccasionRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ITicketRepository, TicketRepository>();
+        }
+
+        private void AddClients(IServiceCollection services)
+        {
+            services.AddTransient<IJiraClient, JiraClient>();
+            services.AddTransient<IUiClient, UiClient>();
+        }
+
+        private void AddServices(IServiceCollection services)
+        {
+            services.AddTransient<IOccasionCardBuilder, OccasionCardBuilder>();
+            services.AddTransient<IUserUpdater, UserUpdater>();
+            services.AddTransient<ITicketCreator, TicketCreator>();
         }
 
         private void AddMappers(IServiceCollection services)

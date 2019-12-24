@@ -1,4 +1,5 @@
-﻿using JiraLikeYou.BLL.Models;
+﻿using System;
+using JiraLikeYou.BLL.Models;
 
 namespace JiraLikeYou.BLL.Mappers
 {
@@ -12,7 +13,9 @@ namespace JiraLikeYou.BLL.Mappers
                 Key = dal.Key,
                 Name = dal.Name,
                 Status = dal.Status,
-                Priority = dal.Priority
+                Priority = dal.Priority,
+                UserEmail = dal.UserEmail,
+                CreateDate = dal.CreateDate
             };
         }
 
@@ -23,6 +26,7 @@ namespace JiraLikeYou.BLL.Mappers
                 Key = bll.Key,
                 Name = bll.Name,
                 Status = bll.Status,
+                UserEmail = bll.UserEmail,
                 Priority = bll.Priority
             };
         }

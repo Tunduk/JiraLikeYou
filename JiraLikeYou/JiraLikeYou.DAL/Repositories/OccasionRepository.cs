@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using JiraLikeYou.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -50,6 +51,7 @@ namespace JiraLikeYou.DAL.Repositories
 
         public void Add(Occasion occasion)
         {
+            occasion.CreateDate = DateTime.Now;
             _dataContext.Occasions.Add(occasion);
             _dataContext.SaveChanges();
         }

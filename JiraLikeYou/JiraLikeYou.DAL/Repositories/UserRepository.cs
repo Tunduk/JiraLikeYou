@@ -8,7 +8,9 @@ namespace JiraLikeYou.DAL.Repositories
     {
         User Get(string email);
 
-        void UpdateOrCreate(User user);
+        void Update(User user);
+
+        void Create(User user);
     }
 
     public class UserRepository : IUserRepository
@@ -25,18 +27,16 @@ namespace JiraLikeYou.DAL.Repositories
             return _dataContext.Users.FirstOrDefault(x => x.Email == email);
         }
 
-        public void UpdateOrCreate(User user)
+        public void Update(User user)
         {
             var oldUser = _dataContext.Users.SingleOrDefault(x => x.Email == user.Email);
+            _dataContext.Users.Update(user);
+            _dataContext.SaveChanges();
+        }
 
-            if (oldUser == null)
-            {
-                _dataContext.Users.Add(user);
-            }
-            else if(oldUser.AvatarLink != user.AvatarLink || oldUser.Name != user.Name)
-            {
-                _dataContext.Users.Update(user);
-            }
+        public void Create(User user)
+        {
+            _dataContext.Users.Add(user);
             _dataContext.SaveChanges();
         }
     }

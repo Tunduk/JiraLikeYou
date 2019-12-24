@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using JiraLikeYou.DAL.Entities;
 
@@ -7,6 +8,8 @@ namespace JiraLikeYou.DAL.Repositories
     public interface ITicketRepository
     {
         Ticket Get(long id);
+
+        Ticket Get(string key, string status);
 
         void Create(Ticket ticket);
     }
@@ -25,8 +28,14 @@ namespace JiraLikeYou.DAL.Repositories
             return _dataContext.Tickets.SingleOrDefault(x => x.Id == id);
         }
 
+        public Ticket Get(string key, string status)
+        {
+            return _dataContext.Tickets.SingleOrDefault(x => x.Key == key && x.Status == status);
+        }
+
         public void Create(Ticket ticket)
         {
+            ticket.CreateDate = DateTime.Now;
             _dataContext.Add(ticket);
             _dataContext.SaveChanges();
         }
