@@ -54,7 +54,7 @@ namespace JiraLikeYou.Backend
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<EventHub>("/jiraHub");
+                endpoints.MapHub<OccasionHub>("/occasionHub");
             });
 
             AutoMigrateDatabase(app);

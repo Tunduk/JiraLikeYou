@@ -49,6 +49,7 @@ namespace JiraLikeYou.BLL.Services
             return text;
         }
 
+        //https://stackoverflow.com/questions/53422907/how-to-use-variable-inside-interpolated-string
         private string ReplaceKeyWords(Match m)
         {
             var keyWord = m.Groups["keyWord"].Value;
@@ -60,7 +61,7 @@ namespace JiraLikeYou.BLL.Services
 
         public IEnumerable<string> GetFieldCodes()
         {
-            var props = GetType().GetFields();
+            var props = typeof(TextBuilder).GetFields();
             return props.Select(x => x.Name);
         }
     }
