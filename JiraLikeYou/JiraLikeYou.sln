@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JiraLikeYou.BLL", "JiraLike
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JiraLikeYou.Backend", "JiraLikeYou.Backend\JiraLikeYou.Backend.csproj", "{D553376D-975C-460A-85EA-AAF0DB73BB70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiraLikeYou.Frontend", "JiraLikeYou.Frontend\JiraLikeYou.Frontend.csproj", "{58912508-D6F0-4541-800D-9AA9902072A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JiraLikeYou.Frontend", "JiraLikeYou.Frontend\JiraLikeYou.Frontend.csproj", "{58912508-D6F0-4541-800D-9AA9902072A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiraLikeYou.UnitTests", "JiraLikeYou.UnitTests\JiraLikeYou.UnitTests.csproj", "{BAC09B5B-C766-4D25-A175-23EA2CA76CE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{58912508-D6F0-4541-800D-9AA9902072A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58912508-D6F0-4541-800D-9AA9902072A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58912508-D6F0-4541-800D-9AA9902072A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAC09B5B-C766-4D25-A175-23EA2CA76CE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAC09B5B-C766-4D25-A175-23EA2CA76CE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAC09B5B-C766-4D25-A175-23EA2CA76CE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAC09B5B-C766-4D25-A175-23EA2CA76CE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

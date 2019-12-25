@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using JiraLikeYou.BLL.Models;
 
 namespace JiraLikeYou.BLL.Services
@@ -15,7 +16,7 @@ namespace JiraLikeYou.BLL.Services
         private string daysInStatus = "несколько";
         private string countTickets = "несколько";
         private string createDate = "не понял дату";
-        private string userEmail = "почта непонятного чувака";
+        private string userEmail = "почта какого-то чувака";
         private string userName = "какой-то чувак";
         private string ticketKey = "непонятный тикет";
         private string ticketName = "непонятный тикет";
@@ -39,7 +40,7 @@ namespace JiraLikeYou.BLL.Services
 
         public string Build(string pattern)
         {
-            return $"{pattern}";
+            return pattern;
         }
 
         public IEnumerable<string> GetFieldCodes()
