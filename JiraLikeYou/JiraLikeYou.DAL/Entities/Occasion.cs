@@ -14,9 +14,9 @@ namespace JiraLikeYou.DAL.Entities
 
         public string UserEmail { get; set; }
 
-        public int DaysInStatus { get; set; }
+        public int? DaysInStatus { get; set; }
 
-        public int CountTickets { get; set; }
+        public int? CountTickets { get; set; }
 
         public DateTime CreateDate { get; set; }
 

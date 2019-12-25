@@ -8,9 +8,9 @@ namespace JiraLikeYou.BLL.Models
 
         public long TriggerId { get; set; }
 
-        public int DaysInStatus { get; set; }
+        public int? DaysInStatus { get; set; }
 
-        public int CountTickets { get; set; }
+        public int? CountTickets { get; set; }
 
         public DateTime CreateDate { get; set; }
 

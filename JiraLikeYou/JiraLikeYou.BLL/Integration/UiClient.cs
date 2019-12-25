@@ -10,6 +10,7 @@ namespace JiraLikeYou.BLL.Services
         IEnumerable<OccasionSmallCard> GetHistory();
 
         OccasionFullCard GetLastCard();
+
         void SendOccasion(Occasion occasion);
     }
 

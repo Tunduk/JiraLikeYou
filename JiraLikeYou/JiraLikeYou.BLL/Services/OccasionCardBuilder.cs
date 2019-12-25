@@ -51,13 +51,14 @@ namespace JiraLikeYou.BLL.Services
         public OccasionSmallCard BuildSmallCard(Occasion occasion)
         {
             var occasionPattern = GetPatternForOccasion(occasion.TriggerId);
+            var textBilder = new TextBuilder(occasion);
 
             return new OccasionSmallCard
             {
                 CreateDate = occasion.CreateDate,
                 ImageLink = occasion.User.AvatarLink,
-                Text = BuildText(occasionPattern.Title, occasion)
-                       + (String.IsNullOrEmpty(occasionPattern.Subtitle) ? BuildText(occasionPattern.Subtitle, occasion) : "")
+                Text = textBilder.Build(occasionPattern.Title)
+                       + (String.IsNullOrEmpty(occasionPattern.Subtitle) ? textBilder.Build(occasionPattern.Subtitle) : "")
             };
         }
 
@@ -65,14 +66,15 @@ namespace JiraLikeYou.BLL.Services
         {
             var occasionPattern = GetPatternForOccasion(occasion.TriggerId);
             var triggerPattern = GetRandomPatternForTrigger(occasion.TriggerId);
+            var textBilder = new TextBuilder(occasion);
 
             return new OccasionFullCard
             {
-                Title = BuildText(occasionPattern.Title, occasion),
-                Subtitle = BuildText(occasionPattern.Subtitle, occasion),
+                Title = textBilder.Build(occasionPattern.Title),
+                Subtitle = textBilder.Build(occasionPattern.Subtitle),
                 ImageLink = triggerPattern?.ImageLink,
                 SoundLink = occasionPattern.SoundLink,
-                Text = triggerPattern == null ? null : BuildText(triggerPattern.Text, occasion)
+                Text = triggerPattern == null ? null : textBilder.Build(triggerPattern.Text)
             };
         }
 
@@ -89,12 +91,6 @@ namespace JiraLikeYou.BLL.Services
                 ?.Select(x => _patternForTriggerMapper.ToBll(x))
                 .ToArray();
             return triggerPatterns?[rand.Next(triggerPatterns.Length)];
-        }
-
-        //TODO: надо б сделать
-        private string BuildText(string pattern, Occasion occasion)
-        {
-            return pattern;
         }
     }
 }
