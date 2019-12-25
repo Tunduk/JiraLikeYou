@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
 using JiraLikeYou.BLL.Models;
 
 namespace JiraLikeYou.BLL.Services
@@ -13,16 +16,16 @@ namespace JiraLikeYou.BLL.Services
 
     public class TextBuilder : ITextBuilder
     {
-        private string daysInStatus = "несколько";
-        private string countTickets = "несколько";
-        private string createDate = "не понял дату";
-        private string userEmail = "почта какого-то чувака";
-        private string userName = "какой-то чувак";
-        private string ticketKey = "непонятный тикет";
-        private string ticketName = "непонятный тикет";
-        private string ticketStatus = "непонятный статус";
-        private string ticketPriority = "непонятный приоритет";
-        private string ticketCreateDate = "дата тикета";
+        public string daysInStatus = "несколько";
+        public string countTickets = "несколько";
+        public string createDate = "не понял дату";
+        public string userEmail = "почта какого-то чувака";
+        public string userName = "какой-то чувак";
+        public string ticketKey = "непонятный тикет";
+        public string ticketName = "непонятный тикет";
+        public string ticketStatus = "непонятный статус";
+        public string ticketPriority = "непонятный приоритет";
+        public string ticketCreateDate = "дата тикета";
 
         public TextBuilder(Occasion occasion)
         {
@@ -40,16 +43,25 @@ namespace JiraLikeYou.BLL.Services
 
         public string Build(string pattern)
         {
-            return pattern;
+            Regex regex = new Regex("{(?<keyWord>[^}]+)}");
+            var text = regex.Replace(pattern, ReplaceKeyWords);
+
+            return text;
+        }
+
+        private string ReplaceKeyWords(Match m)
+        {
+            var keyWord = m.Groups["keyWord"].Value;
+            var prop = GetType().GetField(keyWord);
+            var value = prop?.GetValue(this).ToString();
+            
+            return value ?? keyWord;
         }
 
         public IEnumerable<string> GetFieldCodes()
         {
-            var props = typeof(TextBuilder).GetProperties();
-            foreach (var prop in props)
-            {
-                yield return prop.Name;
-            }
+            var props = GetType().GetFields();
+            return props.Select(x => x.Name);
         }
     }
 }

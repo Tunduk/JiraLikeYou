@@ -28,11 +28,11 @@ namespace JiraLikeYou.UnitTests
             // Arrange
             var pattern = "Кол-во тикетов = {countTickets}, кол-во дней = {daysInStatus}, " +
                           "почта пользователя = {userEmail}, имя пользователя = {userName}, " +
-                          "номер тикета = {ticketKey}";
+                          "номер тикета = {ticketKey}, непонятное поле = {unknowField}";
 
             var expectedText = "Кол-во тикетов = 5, кол-во дней = несколько, " +
                                "почта пользователя = test@email.test, имя пользователя = какой-то чувак, " +
-                               "номер тикета = непонятный тикет";
+                               "номер тикета = непонятный тикет, непонятное поле = unknowField";
 
             // Act
             var factText = _textBuilder.Build(pattern);
