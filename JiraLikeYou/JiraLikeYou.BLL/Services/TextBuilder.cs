@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using JiraLikeYou.BLL.Models;
 
 namespace JiraLikeYou.BLL.Services
@@ -8,6 +6,8 @@ namespace JiraLikeYou.BLL.Services
     public interface ITextBuilder
     {
         string Build(string pattern);
+
+        IEnumerable<string> GetFieldCodes();
     }
 
     public class TextBuilder : ITextBuilder
@@ -21,7 +21,7 @@ namespace JiraLikeYou.BLL.Services
         private string ticketName = "непонятный тикет";
         private string ticketStatus = "непонятный статус";
         private string ticketPriority = "непонятный приоритет";
-        private string ticketCreateDate = "даита тикета";
+        private string ticketCreateDate = "дата тикета";
 
         public TextBuilder(Occasion occasion)
         {
@@ -40,6 +40,15 @@ namespace JiraLikeYou.BLL.Services
         public string Build(string pattern)
         {
             return $"{pattern}";
+        }
+
+        public IEnumerable<string> GetFieldCodes()
+        {
+            var props = typeof(TextBuilder).GetProperties();
+            foreach (var prop in props)
+            {
+                yield return prop.Name;
+            }
         }
     }
 }

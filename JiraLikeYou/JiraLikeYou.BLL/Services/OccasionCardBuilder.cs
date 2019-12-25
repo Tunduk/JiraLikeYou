@@ -11,8 +11,6 @@ namespace JiraLikeYou.BLL.Services
 {
     public interface IOccasionCardBuilder
     {
-        IEnumerable<string> GetFieldCode();
-
         OccasionSmallCard BuildSmallCard(Occasion occasion);
 
         OccasionFullCard BuildFullCard(Occasion occasion);
@@ -39,26 +37,17 @@ namespace JiraLikeYou.BLL.Services
             _patternForTriggerMapper = patternForTriggerMapper;
         }
 
-        public IEnumerable<string> GetFieldCode()
-        {
-            var props = typeof(Occasion).GetProperties();
-            foreach (var prop in props)
-            {
-                yield return prop.Name;
-            }
-        }
-
         public OccasionSmallCard BuildSmallCard(Occasion occasion)
         {
             var occasionPattern = GetPatternForOccasion(occasion.TriggerId);
-            var textBilder = new TextBuilder(occasion);
+            var textBuilder = new TextBuilder(occasion);
 
             return new OccasionSmallCard
             {
                 CreateDate = occasion.CreateDate,
                 ImageLink = occasion.User.AvatarLink,
-                Text = textBilder.Build(occasionPattern.Title)
-                       + (String.IsNullOrEmpty(occasionPattern.Subtitle) ? textBilder.Build(occasionPattern.Subtitle) : "")
+                Text = textBuilder.Build(occasionPattern.Title)
+                       + (String.IsNullOrEmpty(occasionPattern.Subtitle) ? textBuilder.Build(occasionPattern.Subtitle) : "")
             };
         }
 
@@ -66,15 +55,15 @@ namespace JiraLikeYou.BLL.Services
         {
             var occasionPattern = GetPatternForOccasion(occasion.TriggerId);
             var triggerPattern = GetRandomPatternForTrigger(occasion.TriggerId);
-            var textBilder = new TextBuilder(occasion);
+            var textBuilder = new TextBuilder(occasion);
 
             return new OccasionFullCard
             {
-                Title = textBilder.Build(occasionPattern.Title),
-                Subtitle = textBilder.Build(occasionPattern.Subtitle),
+                Title = textBuilder.Build(occasionPattern.Title),
+                Subtitle = textBuilder.Build(occasionPattern.Subtitle),
                 ImageLink = triggerPattern?.ImageLink,
                 SoundLink = occasionPattern.SoundLink,
-                Text = triggerPattern == null ? null : textBilder.Build(triggerPattern.Text)
+                Text = triggerPattern == null ? null : textBuilder.Build(triggerPattern.Text)
             };
         }
 
