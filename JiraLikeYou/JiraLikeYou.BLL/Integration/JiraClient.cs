@@ -1,4 +1,5 @@
-﻿using JiraLikeYou.BLL.Models;
+﻿using System.Linq;
+using JiraLikeYou.BLL.Models;
 using JiraLikeYou.BLL.Services;
 
 namespace JiraLikeYou.BLL.Integration
@@ -20,7 +21,10 @@ namespace JiraLikeYou.BLL.Integration
 
         public void HandleWebhookResponse(JiraWebhookResponse response)
         {
-            //TODO: хорошо бы ослеживать события, а не просто проверять, был ли такой тикет с таким статусом. Вдруг название поменялось или исполнитель
+            if (!response.ChangeFields.Contains("status"))
+            {
+                return;
+            }
             _userUpdater.UpdateOrCreate(response.User);
             _ticketCreator.Create(response);
         }

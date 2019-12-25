@@ -14,7 +14,12 @@ namespace JiraLikeYou.Backend
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseKestrel(x =>
+                    {
+                        x.ListenAnyIP(52000);
+                    });
                 });
     }
 }

@@ -23,21 +23,18 @@ namespace JiraLikeYou.BLL.Services
 
         public void Create(JiraWebhookResponse response)
         {
-            if (_ticketRepository.Get(response.Key, response.Status) == null)
+            var newTicket = new Ticket
             {
-                var newTicket = new Ticket
-                {
-                    Key = response.Key,
-                    Name = response.Name,
-                    Status = response.Status,
-                    Priority = response.Priority,
-                    UserEmail = response.User.Email
-                };
+                Key = response.Key,
+                Name = response.Name,
+                Status = response.Status,
+                Priority = response.Priority,
+                UserEmail = response.User.Email
+            };
 
-                _ticketRepository.Create(_ticketMapper.ToDal(newTicket));
+            _ticketRepository.Create(_ticketMapper.ToDal(newTicket));
 
-                _occasionHandler.HandleNewTicket(newTicket);
-            }
+            _occasionHandler.HandleNewTicket(newTicket);
         }
     }
 }

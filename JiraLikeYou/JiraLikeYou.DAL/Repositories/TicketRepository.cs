@@ -9,8 +9,6 @@ namespace JiraLikeYou.DAL.Repositories
     {
         Ticket Get(long id);
 
-        Ticket Get(string key, string status);
-
         void Create(Ticket ticket);
     }
 
@@ -26,11 +24,6 @@ namespace JiraLikeYou.DAL.Repositories
         public Ticket Get(long id)
         {
             return _dataContext.Tickets.SingleOrDefault(x => x.Id == id);
-        }
-
-        public Ticket Get(string key, string status)
-        {
-            return _dataContext.Tickets.SingleOrDefault(x => x.Key == key && x.Status == status);
         }
 
         public void Create(Ticket ticket)

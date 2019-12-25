@@ -1,4 +1,6 @@
-﻿namespace JiraLikeYou.BLL.Models
+﻿using System.Collections.Generic;
+
+namespace JiraLikeYou.BLL.Models
 {
     public class JiraWebhookResponse
     {
@@ -11,6 +13,8 @@
         public string Priority { get; set; }
 
         public UserJira User { get; set; }
+
+        public IEnumerable<string> ChangeFields { get; set; }
     }
 
     public class UserJira

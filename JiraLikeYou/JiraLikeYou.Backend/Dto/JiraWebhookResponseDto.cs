@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace JiraLikeYou.Backend.Dto
 {
@@ -9,6 +10,9 @@ namespace JiraLikeYou.Backend.Dto
 
         [JsonProperty("issue")]
         public IssueJiraDto Issue { get; set; }
+
+        [JsonProperty("changelog")]
+        public ChangeLogJiraDto ChangeLog { get; set; }
     }
 
     public class UserJiraDto
@@ -69,5 +73,17 @@ namespace JiraLikeYou.Backend.Dto
     {
         [JsonProperty("name")]
         public string Name { get; set; }
+    }
+
+    public class ChangeLogJiraDto
+    {
+        [JsonProperty("items")]
+        public IEnumerable<ItemJiraDto> Items { get; set; }
+    }
+
+    public class ItemJiraDto
+    {
+        [JsonProperty("field")]
+        public string Field { get; set; }
     }
 }

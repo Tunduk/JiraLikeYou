@@ -1,4 +1,5 @@
-﻿using JiraLikeYou.Backend.Dto;
+﻿using System.Linq;
+using JiraLikeYou.Backend.Dto;
 using JiraLikeYou.BLL.Models;
 
 namespace JiraLikeYou.Backend.Mappers
@@ -15,7 +16,8 @@ namespace JiraLikeYou.Backend.Mappers
                     Name = dto.Issue.Field.Name,
                     Status = dto.Issue.Field.Status.Name,
                     Priority = dto.Issue.Field.Priority.Name,
-                    User = ToBll(dto.User)
+                    User = ToBll(dto.User),
+                    ChangeFields = dto.ChangeLog.Items.Select(x => x.Field)
                 };
         }
 
