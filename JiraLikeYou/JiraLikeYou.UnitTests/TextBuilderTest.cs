@@ -26,13 +26,13 @@ namespace JiraLikeYou.UnitTests
         public void BuildTest()
         {
             // Arrange
-            var pattern = "Кол-во тикетов = {countTickets}, кол-во дней = {daysInStatus}, " +
-                          "почта пользователя = {userEmail}, имя пользователя = {userName}, " +
-                          "номер тикета = {ticketKey}, непонятное поле = {unknowField}";
+            var pattern = "Известный корневой параметр = {countTickets}, неизвестный корневой параметр = {daysInStatus}, " +
+                          "известный user параметр = {userEmail}, неизвестный user параметр = {userName}, " +
+                          "параметр неизвестного тикета = {ticketKey}, непонятное поле = {unknowField}";
 
-            var expectedText = "Кол-во тикетов = 5, кол-во дней = несколько, " +
-                               "почта пользователя = test@email.test, имя пользователя = какой-то чувак, " +
-                               "номер тикета = непонятный тикет, непонятное поле = unknowField";
+            var expectedText = "Известный корневой параметр = 5, неизвестный корневой параметр = несколько, " +
+                               "известный user параметр = test@email.test, неизвестный user параметр = какой-то чувак, " +
+                               "параметр неизвестного тикета = непонятный тикет, непонятное поле = unknowField";
 
             // Act
             var factText = _textBuilder.Build(pattern);

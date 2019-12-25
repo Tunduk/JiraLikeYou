@@ -14,9 +14,9 @@ namespace JiraLikeYou.DAL.Entities
 
         public string Priority { get; set; }
 
-        public int DaysInStatus { get; set; }
+        public int? DaysInStatus { get; set; }
 
-        public int CountTickets { get; set; }
+        public int? CountTickets { get; set; }
 
         public OccasionType OccasionType { get; set; }
 

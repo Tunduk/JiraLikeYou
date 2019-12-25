@@ -19,19 +19,16 @@ namespace JiraLikeYou.BLL.Services
     public class OccasionCardBuilder : IOccasionCardBuilder
     {
         private readonly IConfigRepository _configRepository;
-        private readonly OccasionMapper _occasionMapper;
         private readonly TriggerMapper _triggerMapper;
         private readonly PatternForOccasionMapper _patternForOccasionMapper;
         private readonly PatternForTriggerMapper _patternForTriggerMapper;
         
         public OccasionCardBuilder(IConfigRepository configRepository,
-            OccasionMapper occasionMapper,
             TriggerMapper triggerMapper,
             PatternForOccasionMapper patternForOccasionMapper,
             PatternForTriggerMapper patternForTriggerMapper)
         {
             _configRepository = configRepository;
-            _occasionMapper = occasionMapper;
             _triggerMapper = triggerMapper;
             _patternForOccasionMapper = patternForOccasionMapper;
             _patternForTriggerMapper = patternForTriggerMapper;

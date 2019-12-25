@@ -10,8 +10,8 @@
 
         public string Priority { get; set; }
 
-        public int DaysInStatus { get; set; }
+        public int? DaysInStatus { get; set; }
 
-        public int CountTickets { get; set; }
+        public int? CountTickets { get; set; }
     }
 }
