@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using JiraLikeYou.BLL.Mappers;
 using JiraLikeYou.BLL.Models;
 using JiraLikeYou.DAL.Repositories;
@@ -30,11 +31,7 @@ namespace JiraLikeYou.BLL.Services
         public IEnumerable<OccasionSmallCard> GetHistory()
         {
             var occasions = _occasionRepository.Get();
-
-            foreach (var occasion in occasions)
-            {
-                yield return _cardBuilder.BuildSmallCard(_occasionMapper.ToBll(occasion));
-            }
+            return occasions.Select(x => _cardBuilder.BuildSmallCard(_occasionMapper.ToBll(x)));
         }
 
         public OccasionFullCard GetLastCard()

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using JiraLikeYou.BLL.Integration;
 using JiraLikeYou.BLL.Mappers;
 using JiraLikeYou.BLL.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace JiraLikeYou.Backend
 {
@@ -42,6 +43,10 @@ namespace JiraLikeYou.Backend
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.Use(async (context, next) => {
+                context.Request.EnableBuffering();
+                await next();
+            });
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -58,6 +63,7 @@ namespace JiraLikeYou.Backend
             });
 
             AutoMigrateDatabase(app);
+
         }
 
         private void ConfigureContainer(IServiceCollection services)
@@ -65,6 +71,7 @@ namespace JiraLikeYou.Backend
             services.AddDbContext<DataContext>(
                 options => options.UseSqlite(Configuration.GetConnectionString("Db")
             ));
+            
 
             AddClients(services);
             AddMappers(services);

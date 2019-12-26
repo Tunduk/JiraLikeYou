@@ -14,6 +14,7 @@ namespace JiraLikeYou.Frontend
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.ConfigureKestrel(opt => { opt.ListenAnyIP(52001); });
                     webBuilder.UseStartup<Startup>();
                 });
     }
