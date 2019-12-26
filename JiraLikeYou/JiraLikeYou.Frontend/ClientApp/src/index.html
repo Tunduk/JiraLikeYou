@@ -1,14 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>JiraLikeYou.Frontend</title>
-    <base href="/" />
+<html lang="en" class="h-100">
+<head>
+  <meta charset="utf-8" />
+  <title>JiraLikeYou.Frontend</title>
+  <base href="/" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  </head>
-  <body>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <style type="text/css">
+    body{
+      height:100%;
+      min-height: 100vh;
+    }
+    div[ng-view]{
+     height: 100%;
+}
+    app-root {
+  display: block;
+  height: 100%;
+}
+  </style>
+</head>
+
+  <body style="height:100%">
     <app-root>Loading...</app-root>
   </body>
 </html>

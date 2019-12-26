@@ -42,7 +42,7 @@ namespace JiraLikeYou.Backend.Controllers
         [HttpGet("card")]
         public OccasionFullCardDto GetLastCard()
         {
-            return _fullCardMapper.ToDto(_uiClient.GetLastCard());
+            return _fullCardMapper.ToDto(_uiClient.GetLastCard());   
         }
 
         [HttpPost("send")]

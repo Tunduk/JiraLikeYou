@@ -34,7 +34,7 @@ namespace JiraLikeYou.Backend
                     .AllowCredentials()
                     .WithOrigins("http://localhost:52001");
             }));
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddSignalR();
             ConfigureContainer(services);
         }
@@ -105,6 +105,7 @@ namespace JiraLikeYou.Backend
             services.AddTransient<TriggerMapper>();
             services.AddTransient<PatternForOccasionMapper>();
             services.AddTransient<PatternForTriggerMapper>();
+            services.AddTransient<JiraWebhookResponseMapper>();
         }
 
         private void AutoMigrateDatabase(IApplicationBuilder app)

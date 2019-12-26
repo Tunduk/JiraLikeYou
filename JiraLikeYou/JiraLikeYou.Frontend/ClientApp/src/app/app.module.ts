@@ -1,13 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { EventService } from '../services/eventReceiverService';
+import { HistoryService } from '../services/api/history.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { EventService } from '../services/eventReceiverService';
       { path: '', component: HomeComponent, pathMatch: 'full' },
     ])
   ],
-  providers: [EventService],
+  providers: [EventService, HistoryService, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -17,5 +17,10 @@ namespace JiraLikeYou.BLL.Models
         public string UserEmail { get; set; }
 
         public DateTime CreateDate { get; set; }
+
+        public Ticket()
+        {
+
+        }
     }
 }

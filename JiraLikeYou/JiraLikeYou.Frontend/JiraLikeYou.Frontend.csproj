@@ -24,12 +24,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\services\api\history.service.ts" />
+    <None Remove="ClientApp\src\services\api\historyApiDto.ts" />
     <None Remove="ClientApp\src\services\api\httpService.ts" />
     <None Remove="ClientApp\src\services\eventReceiverService.ts" />
     <None Remove="ClientApp\src\services\hubModels\jiraEventDto.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\services\api\history.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\services\api\historyApiDto.ts" />
     <TypeScriptCompile Include="ClientApp\src\services\api\httpService.ts" />
     <TypeScriptCompile Include="ClientApp\src\services\eventReceiverService.ts" />
     <TypeScriptCompile Include="ClientApp\src\services\hubModels\jiraEventDto.ts" />

@@ -9,7 +9,7 @@ namespace JiraLikeYou.DAL.Repositories
     {
         Ticket Get(long id);
 
-        void Create(Ticket ticket);
+        Ticket Create(Ticket ticket);
     }
 
     public class TicketRepository : ITicketRepository
@@ -26,11 +26,13 @@ namespace JiraLikeYou.DAL.Repositories
             return _dataContext.Tickets.SingleOrDefault(x => x.Id == id);
         }
 
-        public void Create(Ticket ticket)
+        public Ticket Create(Ticket ticket)
         {
             ticket.CreateDate = DateTime.Now;
-            _dataContext.Add(ticket);
+            var createdTicket = _dataContext.Add(ticket);
             _dataContext.SaveChanges();
+
+            return createdTicket.Entity;
         }
     }
 }

@@ -53,8 +53,8 @@ namespace JiraLikeYou.Backend.Dto
 
     public class FieldIssueJiraDto
     {
-        [JsonProperty("description")]
-        public string Name { get; set; }
+        [JsonProperty("summary")]
+        public string Summary { get; set; }
 
         [JsonProperty("status")]
         public StatusJiraDto Status { get; set; }
@@ -64,12 +64,6 @@ namespace JiraLikeYou.Backend.Dto
     }
 
     public class StatusJiraDto
-    {
-        [JsonProperty("name")]
-        public string Name { get; set; }
-    }
-
-    public class PriorityJiraDto
     {
         [JsonProperty("name")]
         public string Name { get; set; }

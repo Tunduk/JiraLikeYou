@@ -78,6 +78,7 @@ namespace JiraLikeYou.BLL.Services
         private void CreateOccasion(Occasion occasion)
         {
             _occasionRepository.Create(_occasionMapper.ToDal(occasion));
+            
             _uiClient.SendOccasion(occasion);
         }
     }

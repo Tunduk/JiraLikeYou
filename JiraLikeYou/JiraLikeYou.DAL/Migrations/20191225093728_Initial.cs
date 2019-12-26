@@ -116,27 +116,27 @@ namespace JiraLikeYou.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "Triggers",
                 columns: new[] { "Id", "OccasionTypeId", "Status", "Priority" },
-                values: new object[] { 1, 1, "Open", "Blocker" });
+                values: new object[] { 1, 1, "Open", "Major" });
             migrationBuilder.InsertData(
                 table: "Triggers",
                 columns: new[] { "Id", "OccasionTypeId", "Status" },
-                values: new object[] { 2, 1, "In Progress" });
+                values: new object[] { 2, 1, "In Progress", "Major" });
             migrationBuilder.InsertData(
                 table: "Triggers",
                 columns: new[] { "Id", "OccasionTypeId", "Status" },
-                values: new object[] { 3, 1, "Code Review" });
+                values: new object[] { 3, 1, "Code Review", "Major" });
             migrationBuilder.InsertData(
                 table: "Triggers",
                 columns: new[] { "Id", "OccasionTypeId", "Status" },
-                values: new object[] { 4, 1, "Ready for QA" });
+                values: new object[] { 4, 1, "Ready for QA", "Major" });
             migrationBuilder.InsertData(
                 table: "Triggers",
                 columns: new[] { "Id", "OccasionTypeId", "Status" },
-                values: new object[] { 5, 1, "Testing" });
+                values: new object[] { 5, 1, "Testing", "Major" });
             migrationBuilder.InsertData(
                 table: "Triggers",
                 columns: new[] { "Id", "OccasionTypeId", "Status" },
-                values: new object[] { 6, 1, "Ready For Release" });
+                values: new object[] { 6, 1, "Ready For Release", "Major" });
 
 
             migrationBuilder.CreateTable(

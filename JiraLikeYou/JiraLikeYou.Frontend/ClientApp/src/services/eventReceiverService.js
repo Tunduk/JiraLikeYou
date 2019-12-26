@@ -14,7 +14,7 @@ var EventService = /** @class */ (function () {
     EventService.prototype.createConnection = function () {
         this._hubConnection = new signalr_1.HubConnectionBuilder()
             .configureLogging(signalr_1.LogLevel.Debug)
-            .withUrl('http://localhost:52000/jiraHub')
+            .withUrl('http://localhost:52000/occasionHub')
             .build();
     };
     EventService.prototype.startConnection = function () {
@@ -33,7 +33,7 @@ var EventService = /** @class */ (function () {
     };
     EventService.prototype.registerOnServerEvents = function () {
         var _this = this;
-        this._hubConnection.on('NewJiraEvent', function (data) {
+        this._hubConnection.on('Send', function (data) {
             _this.messageReceived.emit(data);
         });
     };

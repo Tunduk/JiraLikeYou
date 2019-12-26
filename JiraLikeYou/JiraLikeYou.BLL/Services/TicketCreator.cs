@@ -32,9 +32,9 @@ namespace JiraLikeYou.BLL.Services
                 UserEmail = response.User.Email
             };
 
-            _ticketRepository.Create(_ticketMapper.ToDal(newTicket));
+            var createdTicket = _ticketRepository.Create(_ticketMapper.ToDal(newTicket));
 
-            _occasionHandler.HandleNewTicket(newTicket);
+            _occasionHandler.HandleNewTicket(_ticketMapper.ToBll(createdTicket));
         }
     }
 }

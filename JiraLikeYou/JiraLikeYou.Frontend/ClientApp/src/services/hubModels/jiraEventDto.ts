@@ -1,3 +1,7 @@
 export interface JiraEventDto {
-  mainMessage: string;
+  title: string;
+  subtitle: string;
+  imageLink: string;
+  soundLink: string;
+  text: string;
 }

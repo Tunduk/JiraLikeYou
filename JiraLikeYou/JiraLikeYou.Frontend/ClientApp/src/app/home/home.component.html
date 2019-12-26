@@ -1,15 +1,31 @@
-<!--header-->
-<div class="row">
-  <div class="col-sm-12">
-    <!--<h2 class="h2">{{jiraEvent.mainMessage}}</h2>
-  <h3 class="h3">{{jiraEvent.ticketInfo}}</h3>-->
-    <h3 class="h3">Hello!</h3>
-    <h3 class="h3">{{data}}</h3>
+<div class="row h-100">
+  <div class="row h-75">
+    <div class="row h-25  w-100">
+      <div class="col-sm-12">
+        <h2 class="h2">{{jiraEvent.title}}</h2>
+        <h3 class="h3">{{jiraEvent.subtitle}}</h3>
+      </div>
+    </div>
+    <div class="row h-50 w-100">
+      <div class="col-sm-12 w-100">
+        <img src="{{jiraEvent.imageLink}}"  class="mx-auto d-block"/>
+      </div>
+    </div>
+    <div class="row h-25 w-100">
+      <div class="col-sm-12">
+        <h2 class="h2">{{jiraEvent.text}}</h2>
+      </div>
+    </div>
+  </div>
+  <div class="row h-25" *ngFor="let record of historyInfo">
+    <div class="col-sm-4">
+      <h3 class="h3">{{record.createDate}}</h3>
+    </div>
+    <div class="col-sm-4">
+      <img src="{{imageLink}}"/>
+    </div>
+    <div class="col-sm-4">
+      <h3 class="h3">{{record.text}}</h3>
+    </div>
   </div>
 </div>
-<!--history-->
-<!--<div class="row" *ngFor="let record of historyInfo">
-  <div class="col-sm-12">
-    <h3 class="h">{{record.mainMessage}}</h3>
-  </div>
-</div>-->

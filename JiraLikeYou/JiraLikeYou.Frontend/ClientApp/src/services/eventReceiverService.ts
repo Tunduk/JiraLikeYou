@@ -21,7 +21,7 @@ export class EventService {
     this._hubConnection = new HubConnectionBuilder()
       .configureLogging(LogLevel.Debug)
     
-      .withUrl('http://localhost:52000/jiraHub')  
+      .withUrl('http://localhost:52000/occasionHub')  
       .build();  
   }  
   
@@ -40,7 +40,7 @@ export class EventService {
   }  
   
   private registerOnServerEvents(): void {  
-    this._hubConnection.on('NewJiraEvent', (data: any) => {  
+    this._hubConnection.on('Send', (data: any) => {  
       this.messageReceived.emit(data);  
     });  
   }  

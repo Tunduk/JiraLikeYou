@@ -13,7 +13,7 @@ namespace JiraLikeYou.Backend.Mappers
                 : new JiraWebhookResponse
                 {
                     Key = dto.Issue.Key,
-                    Name = dto.Issue.Field.Name,
+                    Name = dto.Issue.Field.Summary,
                     Status = dto.Issue.Field.Status.Name,
                     Priority = dto.Issue.Field.Priority.Name,
                     User = ToBll(dto.User),
