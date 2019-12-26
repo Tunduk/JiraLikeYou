@@ -33,7 +33,7 @@ namespace JiraLikeYou.Backend
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials()
-                    .WithOrigins("http://localhost:52001");
+                    .WithOrigins("http://localhost:52001","http://uk-osa-01:52001");
             }));
             services.AddControllers().AddNewtonsoftJson();
             services.AddSignalR();
