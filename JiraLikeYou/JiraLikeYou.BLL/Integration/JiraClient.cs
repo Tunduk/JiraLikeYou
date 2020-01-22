@@ -11,12 +11,12 @@ namespace JiraLikeYou.BLL.Integration
     public class JiraClient : IJiraClient
     {
         private readonly IUserUpdater _userUpdater;
-        private readonly ITicketCreator _ticketCreator;
+        private readonly ITicketService _ticketService;
 
-        public JiraClient(IUserUpdater userUpdater, ITicketCreator ticketCreator)
+        public JiraClient(IUserUpdater userUpdater, ITicketService ticketService)
         {
             _userUpdater = userUpdater;
-            _ticketCreator = ticketCreator;
+            _ticketService = ticketService;
         }
 
         public void HandleWebhookResponse(JiraWebhookResponse response)
@@ -26,7 +26,7 @@ namespace JiraLikeYou.BLL.Integration
                 return;
             }
             _userUpdater.UpdateOrCreate(response.User);
-            _ticketCreator.Create(response);
+            _ticketService.Create(response);
         }
     }
 }

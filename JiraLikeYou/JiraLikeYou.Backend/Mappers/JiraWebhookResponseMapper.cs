@@ -14,10 +14,10 @@ namespace JiraLikeYou.Backend.Mappers
                 {
                     Key = dto.Issue.Key,
                     Name = dto.Issue.Field.Summary,
-                    Status = dto.Issue.Field.Status.Name,
-                    Priority = dto.Issue.Field.Priority.Name,
+                    StatusId = dto.Issue.Field.Status.Id,
+                    PriorityId = dto.Issue.Field.Priority.Id,
                     User = ToBll(dto.User),
-                    ChangeFields = dto.ChangeLog.Items.Select(x => x.Field)
+                    ChangeFields = dto.ChangeLog?.Items.Select(x => x.Field) ?? Enumerable.Empty<string>()
                 };
         }
 

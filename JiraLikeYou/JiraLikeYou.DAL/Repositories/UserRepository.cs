@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using JiraLikeYou.DAL.Entities;
+using JiraLikeYou.DAL.Repositories.Common;
 
 namespace JiraLikeYou.DAL.Repositories
 {

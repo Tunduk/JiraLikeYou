@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using JiraLikeYou.DAL.Entities;
+using JiraLikeYou.DAL.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace JiraLikeYou.DAL.Repositories

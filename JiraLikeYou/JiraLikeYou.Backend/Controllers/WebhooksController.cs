@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
 using JiraLikeYou.Backend.Dto;
 using JiraLikeYou.Backend.Hubs;
@@ -9,7 +8,6 @@ using JiraLikeYou.BLL.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace JiraLikeYou.Backend.Controllers
 {

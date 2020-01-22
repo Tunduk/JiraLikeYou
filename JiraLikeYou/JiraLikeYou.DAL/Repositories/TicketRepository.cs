@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using JiraLikeYou.DAL.Entities;
+using JiraLikeYou.DAL.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace JiraLikeYou.DAL.Repositories
@@ -28,10 +29,10 @@ namespace JiraLikeYou.DAL.Repositories
 
         public Ticket Create(Ticket ticket)
         {
+
             ticket.CreateDate = DateTime.Now;
             var createdTicket = _dataContext.Add(ticket);
             _dataContext.SaveChanges();
-
             return createdTicket.Entity;
         }
     }

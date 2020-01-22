@@ -1,8 +1,10 @@
 ﻿using System;
+using JiraLikeYou.BLL.Models.Priority;
+using JiraLikeYou.BLL.Models.Status;
 
-namespace JiraLikeYou.BLL.Models
+namespace JiraLikeYou.BLL.Models.Ticket
 {
-    public class Ticket
+    public class TicketModel
     {
         public long Id { get; set; }
 
@@ -10,15 +12,15 @@ namespace JiraLikeYou.BLL.Models
 
         public string Name { get; set; }
 
-        public string Status { get; set; }
+        public StatusModel Status { get; set; }
 
-        public string Priority { get; set; }
+        public PriorityModel Priority { get; set; }
 
         public string UserEmail { get; set; }
 
         public DateTime CreateDate { get; set; }
 
-        public Ticket()
+        public TicketModel()
         {
 
         }

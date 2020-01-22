@@ -60,13 +60,19 @@ namespace JiraLikeYou.Backend.Dto
         public StatusJiraDto Status { get; set; }
 
         [JsonProperty("priority")]
-        public StatusJiraDto Priority { get; set; }
+        public PriorityJiraDto Priority { get; set; }
     }
 
     public class StatusJiraDto
     {
-        [JsonProperty("name")]
-        public string Name { get; set; }
+        [JsonProperty("Id")]
+        public int Id { get; set; }
+    }
+
+    public class PriorityJiraDto
+    {
+        [JsonProperty("Id")]
+        public int Id { get;set;}
     }
 
     public class ChangeLogJiraDto

@@ -2,13 +2,14 @@
 using System.Linq;
 using JiraLikeYou.BLL.Mappers;
 using JiraLikeYou.BLL.Models;
+using JiraLikeYou.BLL.Models.Ticket;
 using JiraLikeYou.DAL.Repositories;
 
 namespace JiraLikeYou.BLL.Services
 {
     public interface IOccasionHandler
     {
-        void HandleNewTicket(Ticket ticket);
+        void HandleNewTicket(TicketModel ticket);
     }
 
     public class OccasionHandler : IOccasionHandler
@@ -37,17 +38,17 @@ namespace JiraLikeYou.BLL.Services
             _uiClient = uiClient;
         }
 
-        public void HandleNewTicket(Ticket ticket)
+        public void HandleNewTicket(TicketModel ticket)
         {
             CreateChangeStatusOccasion(ticket);
         }
 
-        private void CreateChangeStatusOccasion(Ticket ticket)
+        private void CreateChangeStatusOccasion(TicketModel ticket)
         {
             var triggerId = 0L;
             var occasionType = _occasionTypeMapper.ToBll(_configRepository.GetOccasionType("ChangeStatus"));
 
-            var needTriggers = occasionType.Triggers.Where(x => x.Status == ticket.Status && x.Priority == ticket.Priority).ToList();
+            var needTriggers = occasionType.Triggers.Where(x => x.Status.Id == ticket.Status.Id && x.Priority.Id == ticket.Priority.Id).ToList();
 
             if (needTriggers.Count == 0)
             {

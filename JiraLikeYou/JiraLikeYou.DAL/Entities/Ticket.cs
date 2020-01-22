@@ -13,14 +13,17 @@ namespace JiraLikeYou.DAL.Entities
 
         public string Name { get; set; }
 
-        public string Status { get; set; }
+        public int StatusId { get; set; }
 
-        public string Priority { get; set; }
+        public int PriorityId { get; set; }
 
         public string UserEmail { get; set; }
 
         public DateTime CreateDate { get; set; }
 
         public ICollection<Occasion> Occasions { get; set; }
+
+        public Priority Priority { get;set;}
+        public Status Status { get;set;}
     }
 }

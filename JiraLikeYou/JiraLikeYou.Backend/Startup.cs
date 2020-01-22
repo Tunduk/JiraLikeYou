@@ -10,6 +10,9 @@ using Microsoft.Extensions.Hosting;
 using JiraLikeYou.BLL.Integration;
 using JiraLikeYou.BLL.Mappers;
 using JiraLikeYou.BLL.Services;
+using JiraLikeYou.BLL.Validators;
+using JiraLikeYou.DAL;
+using JiraLikeYou.DAL.Repositories.Common;
 using Microsoft.AspNetCore.Http;
 
 namespace JiraLikeYou.Backend
@@ -33,7 +36,7 @@ namespace JiraLikeYou.Backend
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials()
-                    .WithOrigins("http://localhost:52001","http://uk-osa-01:52001");
+                    .WithOrigins("http://localhost:52001", "http://uk-osa-01:52001");
             }));
             services.AddControllers().AddNewtonsoftJson();
             services.AddSignalR();
@@ -43,10 +46,12 @@ namespace JiraLikeYou.Backend
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.Use(async (context, next) => {
+            app.Use(async (context, next) =>
+            {
                 context.Request.EnableBuffering();
                 await next();
             });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -71,12 +76,19 @@ namespace JiraLikeYou.Backend
             services.AddDbContext<DataContext>(
                 options => options.UseSqlite(Configuration.GetConnectionString("Db")
             ));
-            
+
 
             AddClients(services);
             AddMappers(services);
             AddServices(services);
             AddRepositories(services);
+            AddValidators(services);
+        }
+
+        private void AddValidators(IServiceCollection services)
+        {
+            services.AddSingleton<IStatusValidator, StatusValidator>();
+            services.AddSingleton<IPriorityValidator, PriorityValidator>();
         }
 
         private void AddRepositories(IServiceCollection services)
@@ -85,6 +97,9 @@ namespace JiraLikeYou.Backend
             services.AddTransient<IOccasionRepository, OccasionRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ITicketRepository, TicketRepository>();
+            services.AddTransient<IStatusRepository, StatusRepository>();
+            services.AddTransient<IPriorityRepository, PriorityRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
         private void AddClients(IServiceCollection services)
@@ -97,7 +112,7 @@ namespace JiraLikeYou.Backend
         {
             services.AddTransient<IOccasionCardBuilder, OccasionCardBuilder>();
             services.AddTransient<IUserUpdater, UserUpdater>();
-            services.AddTransient<ITicketCreator, TicketCreator>();
+            services.AddTransient<ITicketService, TicketService>();
             services.AddTransient<IOccasionHandler, OccasionHandler>();
         }
 

@@ -1,4 +1,7 @@
-﻿namespace JiraLikeYou.BLL.Models
+﻿using JiraLikeYou.BLL.Models.Priority;
+using JiraLikeYou.BLL.Models.Status;
+
+namespace JiraLikeYou.BLL.Models
 {
     public class Trigger
     {
@@ -6,9 +9,9 @@
 
         public long OccasionTypeId { get; set; }
 
-        public string Status { get; set; }
+        public StatusModel Status { get; set; }
 
-        public string Priority { get; set; }
+        public PriorityModel Priority { get; set; }
 
         public int? DaysInStatus { get; set; }
 

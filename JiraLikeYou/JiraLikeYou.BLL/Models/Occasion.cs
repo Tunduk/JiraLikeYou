@@ -1,4 +1,5 @@
 ﻿using System;
+using JiraLikeYou.BLL.Models.Ticket;
 
 namespace JiraLikeYou.BLL.Models
 {
@@ -16,6 +17,6 @@ namespace JiraLikeYou.BLL.Models
 
         public User User { get; set; }
 
-        public Ticket Ticket { get; set; }
+        public TicketModel Ticket { get; set; }
     }
 }

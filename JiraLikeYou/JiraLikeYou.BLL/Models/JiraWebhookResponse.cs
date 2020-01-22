@@ -8,9 +8,9 @@ namespace JiraLikeYou.BLL.Models
 
         public string Name { get; set; }
 
-        public string Status { get; set; }
+        public int StatusId { get; set; }
 
-        public string Priority { get; set; }
+        public int PriorityId { get; set; }
 
         public UserJira User { get; set; }
 

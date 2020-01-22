@@ -23,7 +23,7 @@ namespace JiraLikeYou.BLL.Mappers
                 CountTickets = dal.CountTickets,
                 CreateDate = dal.CreateDate,
                 User = _userMapper.ToBll(dal.User),
-                Ticket = _ticketMapper.ToBll(dal.Ticket)
+                Ticket = _ticketMapper.MapFromEntity(dal.Ticket)
             };
         }
 

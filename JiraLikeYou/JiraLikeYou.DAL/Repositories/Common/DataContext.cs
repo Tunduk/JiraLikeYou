@@ -1,7 +1,7 @@
 ﻿using JiraLikeYou.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace JiraLikeYou.DAL.Repositories
+namespace JiraLikeYou.DAL.Repositories.Common
 {
     public class DataContext : DbContext
     {
@@ -29,6 +29,10 @@ namespace JiraLikeYou.DAL.Repositories
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<Status> Statuses { get; set; }
+
+        public DbSet<Priority> Priorities { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Trigger>()
@@ -47,4 +51,4 @@ namespace JiraLikeYou.DAL.Repositories
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
-    }
+}
