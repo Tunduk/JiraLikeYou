@@ -48,11 +48,11 @@ namespace JiraLikeYou.BLL.Services
             var triggerId = 0L;
             var occasionType = _occasionTypeMapper.ToBll(_configRepository.GetOccasionType("ChangeStatus"));
 
-            var needTriggers = occasionType.Triggers.Where(x => x.Status.Id == ticket.Status.Id && x.Priority.Id == ticket.Priority.Id).ToList();
+            var needTriggers = occasionType.Triggers.Where(x => x.Status?.Id == ticket.Status.Id && x.Priority?.Id == ticket.Priority.Id).ToList();
 
             if (needTriggers.Count == 0)
             {
-                needTriggers = occasionType.Triggers.Where(x => x.Status.Id == ticket.Status.Id && x.Priority == null).ToList();
+                needTriggers = occasionType.Triggers.Where(x => x.Status?.Id == ticket.Status.Id && x.Priority == null).ToList();
             }
             if (needTriggers.Count == 0)
             {

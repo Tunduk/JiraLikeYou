@@ -36,8 +36,8 @@ namespace JiraLikeYou.BLL.Services
             userName = occasion.User?.Name ?? userName;
             ticketKey = occasion.Ticket?.Key ?? ticketKey;
             ticketName = occasion.Ticket?.Name ?? ticketName;
-            ticketStatus = occasion.Ticket?.Status.Name ?? ticketStatus;
-            ticketPriority = occasion.Ticket?.Priority.Name ?? ticketPriority;
+            ticketStatus = occasion.Ticket?.Status?.Name ?? ticketStatus;
+            ticketPriority = occasion.Ticket?.Priority?.Name ?? ticketPriority;
             ticketCreateDate = occasion.Ticket?.CreateDate.ToString() ?? ticketCreateDate;
         }
 

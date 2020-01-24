@@ -292,6 +292,19 @@ namespace JiraLikeYou.DAL.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[] { 10040, "Тестирование" });
 
+            migrationBuilder.InsertData(
+                table: "Statuses",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 13547, "ЕБАШЬТЕ В ПРОДАКШЕН" });
+
+            migrationBuilder.InsertData(
+                table: "Statuses",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 10035, "Ожидание" });
+            
+
+
+
 
             //Типы событий
             migrationBuilder.InsertData(
@@ -338,6 +351,13 @@ namespace JiraLikeYou.DAL.Migrations
                 table: "Triggers",
                 columns: new[] { "Id", "OccasionTypeId", "StatusId" },
                 values: new object[] { 6, 1, 3 });
+
+            migrationBuilder.InsertData(
+                table: "Triggers",
+                columns: new[] { "Id", "OccasionTypeId", "StatusId" },
+                values: new object[] { 7, 1, 13547 });
+
+            
 
 
             //паттерны для триггеров 
