@@ -21,35 +21,30 @@ namespace JiraLikeYou.DAL.Migrations
                     table.PrimaryKey("PK_OccasionTypes", x => x.Id);
                 });
 
-            migrationBuilder.InsertData(
-                table: "OccasionTypes",
-                columns: new[] { "Id", "Code", "Name" },
-                values: new object[] { 1, "ChangeStatus", "Изменение статуса" });
-            migrationBuilder.InsertData(
-                table: "OccasionTypes",
-                columns: new[] { "Id", "Code", "Name" },
-                values: new object[] { 2, "TooManyTickets", "Слишком много тикетов" });
-            migrationBuilder.InsertData(
-                table: "OccasionTypes",
-                columns: new[] { "Id", "Code", "Name" },
-                values: new object[] { 3, "TicketStuck", "Тикет застрял" });
-
             migrationBuilder.CreateTable(
-                name: "Tickets",
+                name: "Priorities",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Key = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Status = table.Column<string>(nullable: true),
-                    Priority = table.Column<string>(nullable: true),
-                    UserEmail = table.Column<string>(nullable: true),
-                    CreateDate = table.Column<DateTime>(nullable: false)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tickets", x => x.Id);
+                    table.PrimaryKey("PK_Priorities", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Statuses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Statuses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -86,10 +81,36 @@ namespace JiraLikeYou.DAL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-            migrationBuilder.InsertData(
-                table: "PatternsForOccasion",
-                columns: new[] { "Id", "OccasionTypeId", "Title", "Subtitle", "SoundLink" },
-                values: new object[] { 1, 1, "{userName} перевел тикет {ticketKey} в {ticketStatus}", "{ticketName}", "https://zvukipro.com/index.php?do=download&id=4904" });
+
+            migrationBuilder.CreateTable(
+                name: "Tickets",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Key = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    StatusId = table.Column<int>(nullable: false),
+                    PriorityId = table.Column<int>(nullable: false),
+                    UserEmail = table.Column<string>(nullable: true),
+                    CreateDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tickets", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tickets_Priorities_PriorityId",
+                        column: x => x.PriorityId,
+                        principalTable: "Priorities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Tickets_Statuses_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "Statuses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Triggers",
@@ -98,8 +119,8 @@ namespace JiraLikeYou.DAL.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     OccasionTypeId = table.Column<long>(nullable: false),
-                    Status = table.Column<string>(nullable: true),
-                    Priority = table.Column<string>(nullable: true),
+                    StatusId = table.Column<int>(nullable: true),
+                    PriorityId = table.Column<int>(nullable: true),
                     DaysInStatus = table.Column<int>(nullable: true),
                     CountTickets = table.Column<int>(nullable: true)
                 },
@@ -112,32 +133,19 @@ namespace JiraLikeYou.DAL.Migrations
                         principalTable: "OccasionTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Triggers_Priorities_PriorityId",
+                        column: x => x.PriorityId,
+                        principalTable: "Priorities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Triggers_Statuses_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "Statuses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
-            migrationBuilder.InsertData(
-                table: "Triggers",
-                columns: new[] { "Id", "OccasionTypeId", "Status", "Priority" },
-                values: new object[] { 1, 1, "Open", "Major" });
-            migrationBuilder.InsertData(
-                table: "Triggers",
-                columns: new[] { "Id", "OccasionTypeId", "Status" },
-                values: new object[] { 2, 1, "In Progress", "Major" });
-            migrationBuilder.InsertData(
-                table: "Triggers",
-                columns: new[] { "Id", "OccasionTypeId", "Status" },
-                values: new object[] { 3, 1, "Code Review", "Major" });
-            migrationBuilder.InsertData(
-                table: "Triggers",
-                columns: new[] { "Id", "OccasionTypeId", "Status" },
-                values: new object[] { 4, 1, "Ready for QA", "Major" });
-            migrationBuilder.InsertData(
-                table: "Triggers",
-                columns: new[] { "Id", "OccasionTypeId", "Status" },
-                values: new object[] { 5, 1, "Testing", "Major" });
-            migrationBuilder.InsertData(
-                table: "Triggers",
-                columns: new[] { "Id", "OccasionTypeId", "Status" },
-                values: new object[] { 6, 1, "Ready For Release", "Major" });
-
 
             migrationBuilder.CreateTable(
                 name: "Occasions",
@@ -189,10 +197,154 @@ namespace JiraLikeYou.DAL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-            migrationBuilder.InsertData(
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Occasions_TicketId",
+                table: "Occasions",
+                column: "TicketId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Occasions_UserEmail",
+                table: "Occasions",
+                column: "UserEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PatternsForOccasion_OccasionTypeId",
+                table: "PatternsForOccasion",
+                column: "OccasionTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PatternsForTrigger_TriggerId",
                 table: "PatternsForTrigger",
-                columns: new[] { "Id", "TriggerId", "Text", "ImageLink" },
-                values: new object[] { 1, 1, "ААА!!! Это же блокер!!!", "https://i.gifer.com/KoN.gif" });
+                column: "TriggerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_PriorityId",
+                table: "Tickets",
+                column: "PriorityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_StatusId",
+                table: "Tickets",
+                column: "StatusId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Triggers_OccasionTypeId",
+                table: "Triggers",
+                column: "OccasionTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Triggers_PriorityId",
+                table: "Triggers",
+                column: "PriorityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Triggers_StatusId",
+                table: "Triggers",
+                column: "StatusId");
+
+            //priorities
+            
+
+            migrationBuilder.InsertData(
+                table: "Priorities",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 3, "Major" });
+
+            migrationBuilder.InsertData(
+                table: "Priorities",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "НАС УВОЛЯТ" });
+
+            migrationBuilder.InsertData(
+                table: "Priorities",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 4, "Minor" });
+
+            migrationBuilder.InsertData(
+                table: "Priorities",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 5, "Trivial" });
+
+            //Статусы
+            migrationBuilder.InsertData(
+                table: "Statuses",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "Открыт" });
+
+            migrationBuilder.InsertData(
+                table: "Statuses",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 3, "В работе" });
+
+            migrationBuilder.InsertData(
+                table: "Statuses",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 10013, "Код ревью" });
+
+            migrationBuilder.InsertData(
+                table: "Statuses",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 10151, "Готово к тестированию" });
+
+            migrationBuilder.InsertData(
+                table: "Statuses",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 10040, "Тестирование" });
+
+
+            //Типы событий
+            migrationBuilder.InsertData(
+                table: "OccasionTypes",
+                columns: new[] { "Id", "Code", "Name" },
+                values: new object[] { 1, "ChangeStatus", "Изменение статуса" });
+            migrationBuilder.InsertData(
+                table: "OccasionTypes",
+                columns: new[] { "Id", "Code", "Name" },
+                values: new object[] { 2, "TooManyTickets", "Слишком много тикетов" });
+            migrationBuilder.InsertData(
+                table: "OccasionTypes",
+                columns: new[] { "Id", "Code", "Name" },
+                values: new object[] { 3, "TicketStuck", "Тикет застрял" });
+
+            //паттерны на события
+            migrationBuilder.InsertData(
+                table: "PatternsForOccasion",
+                columns: new[] { "Id", "OccasionTypeId", "Title", "Subtitle", "SoundLink" },
+                values: new object[] { 1, 1, "{userName} перевел тикет {ticketKey} в {ticketStatus}", "{ticketName}", "https://zvukipro.com/index.php?do=download&id=4904" });
+
+            //триггеры
+            migrationBuilder.InsertData(
+                table: "Triggers",
+                columns: new[] { "Id", "OccasionTypeId", "StatusId", "PriorityId" },
+                values: new object[] { 1, 1, 1, 1 });
+            migrationBuilder.InsertData(
+                table: "Triggers",
+                columns: new[] { "Id", "OccasionTypeId", "StatusId" },
+                values: new object[] { 2, 1, 3 });
+            migrationBuilder.InsertData(
+                table: "Triggers",
+                columns: new[] { "Id", "OccasionTypeId", "StatusId" },
+                values: new object[] { 3, 1, 10013 });
+            migrationBuilder.InsertData(
+                table: "Triggers",
+                columns: new[] { "Id", "OccasionTypeId", "StatusId" },
+                values: new object[] { 4, 1, 10151 });
+            migrationBuilder.InsertData(
+                table: "Triggers",
+                columns: new[] { "Id", "OccasionTypeId", "StatusId" },
+                values: new object[] { 5, 1, 10040 });
+            migrationBuilder.InsertData(
+                table: "Triggers",
+                columns: new[] { "Id", "OccasionTypeId", "StatusId" },
+                values: new object[] { 6, 1, 3 });
+
+
+            //паттерны для триггеров 
+            migrationBuilder.InsertData(
+              table: "PatternsForTrigger",
+              columns: new[] { "Id", "TriggerId", "Text", "ImageLink" },
+              values: new object[] { 1, 1, "ААА!!! Это же блокер!!!", "https://i.gifer.com/KoN.gif" });
             migrationBuilder.InsertData(
                 table: "PatternsForTrigger",
                 columns: new[] { "Id", "TriggerId", "Text", "ImageLink" },
@@ -237,31 +389,6 @@ namespace JiraLikeYou.DAL.Migrations
                 table: "PatternsForTrigger",
                 columns: new[] { "Id", "TriggerId", "Text", "ImageLink" },
                 values: new object[] { 12, 6, "Тикет готов", "https://cs4.pikabu.ru/images/big_size_comm_an/2016-05_3/1463047313192629303.gif" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Occasions_TicketId",
-                table: "Occasions",
-                column: "TicketId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Occasions_UserEmail",
-                table: "Occasions",
-                column: "UserEmail");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PatternsForOccasion_OccasionTypeId",
-                table: "PatternsForOccasion",
-                column: "OccasionTypeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PatternsForTrigger_TriggerId",
-                table: "PatternsForTrigger",
-                column: "TriggerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Triggers_OccasionTypeId",
-                table: "Triggers",
-                column: "OccasionTypeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -286,6 +413,12 @@ namespace JiraLikeYou.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "OccasionTypes");
+
+            migrationBuilder.DropTable(
+                name: "Priorities");
+
+            migrationBuilder.DropTable(
+                name: "Statuses");
         }
     }
 }

@@ -14,7 +14,7 @@ namespace JiraLikeYou.DAL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.0");
+                .HasAnnotation("ProductVersion", "3.1.1");
 
             modelBuilder.Entity("JiraLikeYou.DAL.Entities.Occasion", b =>
                 {
@@ -189,10 +189,10 @@ namespace JiraLikeYou.DAL.Migrations
                     b.Property<long>("OccasionTypeId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("PriorityId")
+                    b.Property<int?>("PriorityId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("StatusId")
+                    b.Property<int?>("StatusId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -276,15 +276,11 @@ namespace JiraLikeYou.DAL.Migrations
 
                     b.HasOne("JiraLikeYou.DAL.Entities.Priority", "Priority")
                         .WithMany()
-                        .HasForeignKey("PriorityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PriorityId");
 
                     b.HasOne("JiraLikeYou.DAL.Entities.Status", "Status")
                         .WithMany()
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StatusId");
                 });
 #pragma warning restore 612, 618
         }
