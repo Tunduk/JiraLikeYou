@@ -23,6 +23,9 @@ namespace JiraLikeYou.BLL.Mappers
 
         public StatusModel MapFromEntity(Status status)
         {
+            if(status == null)
+                return null;
+
             return new StatusModel
             {
                 Id = status.Id,

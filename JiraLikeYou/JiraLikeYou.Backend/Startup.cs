@@ -128,6 +128,11 @@ namespace JiraLikeYou.Backend
             services.AddTransient<PatternForOccasionMapper>();
             services.AddTransient<PatternForTriggerMapper>();
             services.AddTransient<JiraWebhookResponseMapper>();
+
+            services.AddScoped<IStatusMapper, StatusMapper>();
+            services.AddScoped<IPriorityMapper, PriorityMapper>();
+            services.AddScoped<IPriorityDtoMapper, PriorityDtoMapper>();
+            services.AddScoped<IStatusDtoMapper, StatusDtoDtoMapper>();
         }
 
         private void AutoMigrateDatabase(IApplicationBuilder app)

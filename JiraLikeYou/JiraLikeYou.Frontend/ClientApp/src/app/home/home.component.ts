@@ -16,10 +16,6 @@ export class HomeComponent implements OnInit {
     this.eventService.messageReceived.subscribe(x => {
     this.jiraEvent = x as JiraEventDto;
       console.log(x);
-      let audio = new Audio();
-      audio.src = 'https://pro-sound.org/uploads/tracks/icq/Sound_05952.mp3';
-      audio.load();
-      audio.play();
       this.historyService.getLastHistory().subscribe(x => { x.reverse();this.historyInfo =x ; console.log(x); });
     });
   }

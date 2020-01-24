@@ -5,10 +5,10 @@ namespace JiraLikeYou.BLL.Mappers
 {
     public class TicketMapper
     {
-        private readonly StatusMapper _statusMapper;
-        private readonly PriorityMapper _priorityMapper;
+        private readonly IStatusMapper _statusMapper;
+        private readonly IPriorityMapper _priorityMapper;
 
-        public TicketMapper(StatusMapper statusMapper, PriorityMapper priorityMapper)
+        public TicketMapper(IStatusMapper statusMapper, IPriorityMapper priorityMapper)
         {
             _statusMapper = statusMapper;
             _priorityMapper = priorityMapper;

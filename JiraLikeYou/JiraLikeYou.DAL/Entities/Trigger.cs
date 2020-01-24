@@ -10,11 +10,11 @@ namespace JiraLikeYou.DAL.Entities
 
         public long OccasionTypeId { get; set; }
 
-        public int StatusId { get; set; }
+        public int? StatusId { get; set; }
 
         public Status Status { get; set; }
 
-        public int PriorityId { get; set; }
+        public int? PriorityId { get; set; }
 
         public Priority Priority { get; set; }
 

@@ -23,6 +23,9 @@ namespace JiraLikeYou.BLL.Mappers
 
         public PriorityModel MapFromEntity(Priority priority)
         {
+            if(priority == null)
+                return null;
+            
             return new PriorityModel
             {
                 Id = priority.Id,

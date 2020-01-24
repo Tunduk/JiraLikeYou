@@ -52,7 +52,7 @@ namespace JiraLikeYou.BLL.Services
 
             if (needTriggers.Count == 0)
             {
-                needTriggers = occasionType.Triggers.Where(x => x.Status == ticket.Status && x.Priority == null).ToList();
+                needTriggers = occasionType.Triggers.Where(x => x.Status.Id == ticket.Status.Id && x.Priority == null).ToList();
             }
             if (needTriggers.Count == 0)
             {
