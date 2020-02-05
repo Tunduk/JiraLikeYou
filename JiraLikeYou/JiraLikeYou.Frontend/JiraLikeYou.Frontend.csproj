@@ -27,6 +27,7 @@
     <None Remove="ClientApp\src\app\admin-panel\admin-panel.component.html" />
     <None Remove="ClientApp\src\app\admin-panel\admin-panel.component.ts" />
     <None Remove="ClientApp\src\app\home\home.component.css" />
+    <None Remove="ClientApp\src\pipes\shortDate.pipe.ts" />
     <None Remove="ClientApp\src\services\api\history.service.ts" />
     <None Remove="ClientApp\src\services\api\historyApiDto.ts" />
     <None Remove="ClientApp\src\services\api\httpService.ts" />
@@ -38,6 +39,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\admin-panel\admin-panel.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\admin-panel\admin-panel.component.html" />
     <TypeScriptCompile Include="ClientApp\src\app\home\home.component.css" />
+    <TypeScriptCompile Include="ClientApp\src\pipes\shortDate.pipe.ts" />
     <TypeScriptCompile Include="ClientApp\src\services\api\history.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\services\api\historyApiDto.ts" />
     <TypeScriptCompile Include="ClientApp\src\services\api\httpService.ts" />

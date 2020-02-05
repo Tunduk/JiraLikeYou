@@ -14,3 +14,10 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+/*bootsrapp 4 mx-auto and d-block classes merge*/
+.img-center {
+  margin-right: auto !important;
+  margin-left: auto !important;
+  display: block !important;
+}

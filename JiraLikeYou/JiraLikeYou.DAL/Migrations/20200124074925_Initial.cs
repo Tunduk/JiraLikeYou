@@ -295,7 +295,7 @@ namespace JiraLikeYou.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "Statuses",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 13547, "ЕБАШЬТЕ В ПРОДАКШЕН" });
+                values: new object[] { 13547, "Готово к релизу" });
 
             migrationBuilder.InsertData(
                 table: "Statuses",
@@ -350,13 +350,7 @@ namespace JiraLikeYou.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "Triggers",
                 columns: new[] { "Id", "OccasionTypeId", "StatusId" },
-                values: new object[] { 6, 1, 3 });
-
-            migrationBuilder.InsertData(
-                table: "Triggers",
-                columns: new[] { "Id", "OccasionTypeId", "StatusId" },
-                values: new object[] { 7, 1, 13547 });
-
+                values: new object[] { 6, 1, 13547 });
             
 
 

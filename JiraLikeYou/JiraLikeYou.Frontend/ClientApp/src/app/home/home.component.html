@@ -1,29 +1,36 @@
-<div class="row h-100">
-  <div class="row h-75">
-    <div class="row h-25 w-100">
-      <div class="col-sm-12">
-        <h1 class="h1 text-center">{{jiraEvent.title}}</h1>
-        <h3 class="h3 text-center text-secondary">{{jiraEvent.subtitle}}</h3>
-      </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col text-center">
+      <h1 class="h1">{{jiraEvent.title}}</h1>
     </div>
-    <div class="row h-50 w-100 mb-5">
-      <img src="{{jiraEvent.imageLink}}"  class="mx-auto d-block img-full"/>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <h3 class="h3 text-secondary">{{jiraEvent.subtitle}}</h3>
     </div>
-    <div class="row h-25 w-100">
-      <div class="col-sm-12">
-        <h1 class="h1 text-center">{{jiraEvent.text}}</h1>
+  </div>
+  <div class="row">
+    <div class="col">
+      <img class="img-center" src="{{jiraEvent.imageLink}}" />
+    </div>
+  </div>
+  <div class="row mb-5">
+    <div class="col text-center">
+      <h1 class="h1">{{jiraEvent.text}}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col mx-auto">
+      <div class="row" *ngFor="let record of historyInfo">
+        <div class="col-sm-2 text-center">
+          <h3 class="h5">{{record.createDate | date:"dd MMMM hh:mm"}}</h3>
+        </div>
+        <div class="col-sm-3">
+          <img src="{{record.imageLink}}" class="img-center" />
+        </div>
+        <div class="col-sm-7 text-center">
+          <h3 class="h5">{{record.text}}</h3>
+        </div>
       </div>
     </div>
   </div>
-  <div class="row" *ngFor="let record of historyInfo">
-    <div class="col-sm-2">
-      <h3 class="h5">{{record.createDate}}</h3>
-    </div>
-    <div class="col-sm-1">
-      <img src="{{imageLink}}"/>
-    </div>
-    <div class="col-sm-9">
-      <h3 class="h5">{{record.text}}</h3>
-    </div>
-  </div>
-</div>

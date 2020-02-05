@@ -4,6 +4,7 @@ import { JiraEventDto } from '../../services/hubModels/jiraEventDto';
 import { HistoryApiDto } from '../../services/api/historyApiDto';
 import { HistoryService } from '../../services/api/history.service';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
