@@ -13,13 +13,13 @@ namespace JiraLikeYou.BLL.Services
     public class TicketService : ITicketService
     {
         private readonly ITicketRepository _ticketRepository;
-        private readonly TicketMapper _ticketMapper;
+        private readonly ITicketMapper _ticketMapper;
         private readonly IOccasionHandler _occasionHandler;
         private readonly IStatusRepository _statusRepository;
         private readonly IPriorityRepository _priorityRepository;
 
         public TicketService(ITicketRepository ticketRepository,
-            TicketMapper ticketMapper,
+            ITicketMapper ticketMapper,
             IOccasionHandler occasionHandler,
             IPriorityRepository priorityRepository,
             IStatusRepository statusRepository)

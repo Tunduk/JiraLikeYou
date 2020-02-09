@@ -121,7 +121,7 @@ namespace JiraLikeYou.Backend
             services.AddTransient<OccasionSmallCardMapper>();
             services.AddTransient<OccasionFullCardMapper>();
             services.AddTransient<UserMapper>();
-            services.AddTransient<TicketMapper>();
+            
             services.AddTransient<OccasionMapper>();
             services.AddTransient<OccasionTypeMapper>();
             services.AddTransient<TriggerMapper>();
@@ -133,6 +133,7 @@ namespace JiraLikeYou.Backend
             services.AddScoped<IPriorityMapper, PriorityMapper>();
             services.AddScoped<IPriorityDtoMapper, PriorityDtoMapper>();
             services.AddScoped<IStatusDtoMapper, StatusDtoDtoMapper>();
+            services.AddTransient<ITicketMapper,TicketMapper>();
         }
 
         private void AutoMigrateDatabase(IApplicationBuilder app)

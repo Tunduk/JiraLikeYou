@@ -31,7 +31,9 @@ namespace JiraLikeYou.DAL.Repositories
         {
             return _dataContext.Occasions
                 .Include(x => x.User)
-                .Include(x => x.Ticket)?
+                .Include(x => x.Ticket)
+                .Include(x => x.Ticket.Status)
+                .Include(x => x.Ticket.Priority)
                 .AsEnumerable();
         }
 

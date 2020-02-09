@@ -5,9 +5,9 @@ namespace JiraLikeYou.BLL.Mappers
     public class OccasionMapper
     {
         private readonly UserMapper _userMapper;
-        private readonly TicketMapper _ticketMapper;
+        private readonly ITicketMapper _ticketMapper;
 
-        public OccasionMapper(UserMapper userMapper, TicketMapper ticketMapper)
+        public OccasionMapper(UserMapper userMapper, ITicketMapper ticketMapper)
         {
             _userMapper = userMapper;
             _ticketMapper = ticketMapper;

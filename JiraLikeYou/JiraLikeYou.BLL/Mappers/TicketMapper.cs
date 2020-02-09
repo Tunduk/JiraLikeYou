@@ -1,9 +1,15 @@
 ﻿using JiraLikeYou.BLL.Models;
 using JiraLikeYou.BLL.Models.Ticket;
+using JiraLikeYou.DAL.Entities;
 
 namespace JiraLikeYou.BLL.Mappers
 {
-    public class TicketMapper
+    public interface ITicketMapper
+    {
+        TicketModel MapFromEntity(Ticket dal);
+    }
+
+    public class TicketMapper : ITicketMapper
     {
         private readonly IStatusMapper _statusMapper;
         private readonly IPriorityMapper _priorityMapper;
@@ -13,17 +19,17 @@ namespace JiraLikeYou.BLL.Mappers
             _statusMapper = statusMapper;
             _priorityMapper = priorityMapper;
         }
-        public TicketModel MapFromEntity(DAL.Entities.Ticket dal)
+        public TicketModel MapFromEntity(Ticket ticketEntity)
         {
-            return dal == null ? null : new TicketModel
+            return ticketEntity == null ? null : new TicketModel
             {
-                Id = dal.Id,
-                Key = dal.Key,
-                Name = dal.Name,
-                Status = _statusMapper.MapFromEntity(dal.Status),
-                Priority = _priorityMapper.MapFromEntity(dal.Priority),
-                UserEmail = dal.UserEmail,
-                CreateDate = dal.CreateDate
+                Id = ticketEntity.Id,
+                Key = ticketEntity.Key,
+                Name = ticketEntity.Name,
+                Status = _statusMapper.MapFromEntity(ticketEntity.Status),
+                Priority = _priorityMapper.MapFromEntity(ticketEntity.Priority),
+                UserEmail = ticketEntity.UserEmail,
+                CreateDate = ticketEntity.CreateDate
             };
         }
     }
