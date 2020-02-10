@@ -41,14 +41,19 @@ namespace JiraLikeYou.DAL.Repositories
         {
             return _dataContext.Occasions
                 .Include(x => x.User)
-                .Include(x => x.Ticket)?
+                .Include(x => x.Ticket)
+                .Include(x => x.Ticket.Status)
+                .Include(x => x.Ticket.Priority)
                 .FirstOrDefault(p => p.Id == _dataContext.Occasions.Max(x => x.Id));
         }
 
         public Occasion Get(long id)
         {
-            return _dataContext.Occasions.Include(x => x.User)
-                .Include(x => x.Ticket)?
+            return _dataContext.Occasions
+                .Include(x => x.User)
+                .Include(x => x.Ticket)
+                .Include(x => x.Ticket.Status)
+                .Include(x => x.Ticket.Priority)
                 .FirstOrDefault(x => x.Id == id);
         }
 
