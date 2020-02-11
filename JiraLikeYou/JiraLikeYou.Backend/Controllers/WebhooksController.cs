@@ -38,7 +38,6 @@ namespace JiraLikeYou.Backend.Controllers
         [HttpPost("{jira}")]
         public async Task<StatusCodeResult> TicketUpdate([FromBody]JiraWebhookResponseDto updateDto)
         {
-
             var stream = this.HttpContext.Request.Body;
             stream.Position = 0;
             using (var reader = new StreamReader(stream))
@@ -46,8 +45,6 @@ namespace JiraLikeYou.Backend.Controllers
                 string body = reader.ReadToEnd();
                 _logger.LogInformation(body);
             }
-
-
             
             _jiraClient.HandleWebhookResponse(_jiraWebhookResponseMapper.ToBll(updateDto));
             await _hub.Clients.All.Send(_fullCardMapper.ToDto(_uiClient.GetLastCard()));

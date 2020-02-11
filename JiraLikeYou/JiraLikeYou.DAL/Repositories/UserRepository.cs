@@ -30,7 +30,9 @@ namespace JiraLikeYou.DAL.Repositories
         public void Update(User user)
         {
             var oldUser = _dataContext.Users.SingleOrDefault(x => x.Email == user.Email);
-            _dataContext.Users.Update(user);
+            oldUser.AvatarLink = user.AvatarLink;
+            oldUser.Name = user.Name;
+            _dataContext.Users.Update(oldUser);
             _dataContext.SaveChanges();
         }
 

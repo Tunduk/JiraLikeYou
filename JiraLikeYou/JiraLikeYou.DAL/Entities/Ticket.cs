@@ -24,6 +24,7 @@ namespace JiraLikeYou.DAL.Entities
         public ICollection<Occasion> Occasions { get; set; }
 
         public Priority Priority { get;set;}
+
         public Status Status { get;set;}
     }
 }

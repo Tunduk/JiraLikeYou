@@ -244,8 +244,6 @@ namespace JiraLikeYou.DAL.Migrations
                 column: "StatusId");
 
             //priorities
-            
-
             migrationBuilder.InsertData(
                 table: "Priorities",
                 columns: new[] { "Id", "Name" },
@@ -301,10 +299,6 @@ namespace JiraLikeYou.DAL.Migrations
                 table: "Statuses",
                 columns: new[] { "Id", "Name" },
                 values: new object[] { 10035, "Ожидание" });
-            
-
-
-
 
             //Типы событий
             migrationBuilder.InsertData(

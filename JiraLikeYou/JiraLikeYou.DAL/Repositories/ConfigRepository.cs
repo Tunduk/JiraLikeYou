@@ -30,6 +30,9 @@ namespace JiraLikeYou.DAL.Repositories
         {
             return _dataContext.OccasionTypes
                 .Include(x => x.Triggers)
+                .ThenInclude(x => x.Priority)
+                .Include(x => x.Triggers)
+                .ThenInclude(x => x.Status)
                 .SingleOrDefault(x => x.Code == code);
         }
 

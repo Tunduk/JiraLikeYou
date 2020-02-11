@@ -41,7 +41,6 @@ namespace JiraLikeYou.BLL.Services
             if(priority == null)
                 return;
 
-
             var newTicket = new Ticket
             {
                 Key = response.Key,
